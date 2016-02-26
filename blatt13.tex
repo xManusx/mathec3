@@ -1,0 +1,177 @@
+\documentclass[fleqn,12pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage[ngerman]{babel}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{gauss}
+\usepackage{braket}
+\usepackage{hyperref}
+\usepackage{wasysym}
+\usepackage{scrpage2}
+\usepackage{tikz}
+\usetikzlibrary{intersections}
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\ohead{\pagemark}
+\ihead{Magnus Berendes, matrikelnr}
+\ifoot{\today}
+\ofoot{\blattn}
+%\setheadtopline{1pt}
+\setheadsepline{0.4pt}
+\setfootsepline{0.4pt}
+\usepackage{enumitem}
+\setenumerate[0]{label=\alph*)}
+\newcommand{\id}{\, \mathrm{d}}
+\newcommand{\intl}{\int\displaylimits}
+% New definition of square root:
+% it renames \sqrt as \oldsqrt
+\let\oldsqrt\sqrt
+% it defines the new \sqrt in terms of the old one
+\def\sqrt{\mathpalette\DHLhksqrt}
+\def\DHLhksqrt#1#2{%
+	\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
+	\advance\dimen0-0.2\ht0
+	\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+{\box0\lower0.4pt\box2}}
+
+\newcommand{\karos}[2]{
+	\begin{tikzpicture}
+		\draw[step=0.5cm, color=gray] (0,0) grid (#1 cm , #2 cm);
+	\end{tikzpicture}
+}
+\newcommand{\abs}[1]{
+	\left \vert #1 \right \vert
+}
+\newcommand{\absbb}[1]{
+	\left \Vert #1 \right \Vert
+}
+
+%TODO
+\newcommand{\blattn}{Blatt 13}
+\begin{document}
+\section*{\blattn}
+Bearbeitet/Zur Korrektur:
+
+\noindent
+\begin{Form}
+	\CheckBox{Aufgabe A37}\\
+	\CheckBox{Aufgabe A38}\\
+	\CheckBox{Aufgabe A39}\\
+	%\CheckBox{Aufgabe A4}
+\end{Form}
+
+
+Anmerkung zur Notation:
+\begin{align*}
+	[a]_n = [b]_n \Leftrightarrow a \equiv b \mod n
+\end{align*}
+\section*{A37}
+\begin{enumerate}
+	\item
+		\begin{align*}
+			&n \equiv 0 \mod 11 \Leftrightarrow Q_{alt}(n) \equiv 0  \mod 11\\
+		\left[Q_{alt}(n)\right]_{11} &= \left[\sum_{i=0}^k (-1)^in_i\right]_{11} = \sum_{i=0}^k [-1]_{11}^i [n_i]_{11}
+																							 = \sum_{i=0}^k
+																							 [10]_{11}^i [n_i]_{11} = [n]_{11}\\
+																							 &\Rightarrow n \equiv Q_{alt}(n) \mod 11\\
+		&\Rightarrow Q_{alt}(n) \equiv 0 \mod 11\Rightarrow n \equiv 0 \mod 11 
+		\end{align*}
+
+
+	\item
+		\begin{align*}
+			\left[7^{77}\right]_{10} &= [7]_{10}^{77}\\ 
+																											 &= [-3]^{77}_{10}\\
+															 &=
+			[-1]_{10}^{77}[3]^{77}_{10}\\
+			&=	[-1]_{10} [3]_{10}^{64}[3]_{10}^{13} = [-1]_{10} [3]_{10}^{2^6} [3]_{10}^3 [3]_{10}^{2^5}\\
+			&= [9]_{10} [9]_{10}^{6} [7]_{10} [9]_{10}^5\\
+			&= [3]_{10} [-1]_{10}^6 [9]^2_{10} [9]^3_{10}\\
+			&= [3]_{10} [1]_{10} [1]_{10}  [9]_{10}\\
+			&= [7]_{10}
+		\end{align*}
+		\begin{align*}
+			7^{77} \mod 10 = 7
+		\end{align*}
+
+\end{enumerate}
+
+
+\section*{A38}
+\begin{enumerate}
+	\item
+		\begin{align*}
+			612 &= 6 \cdot 96 + 36\\
+			96 &= 2 \cdot 36 + 24 \\
+			36 &= 1 \cdot 24 + 12\\
+			24 &= 2 \cdot 12 + 0
+		\end{align*}
+		\begin{align*}
+			\gcd(96, 612) = 12
+		\end{align*}
+		
+	\item
+		\begin{align*}
+			x^3 -4x &= \left(x+4\right)\left(x^2 -4x+4\right) + \left(8x -16\right)\\
+			\left(x^2 - 4x + 4\right) &= \left(\frac18 x - \frac14\right) \left(8x - 16\right) + 0 \\
+		\end{align*}
+		\begin{align*}
+			\gcd(x^3 -4x, x^2 -4x + 4) = 8x - 16 = 8(x - 2)
+		\end{align*}
+\end{enumerate}
+
+
+\section*{A39}
+\begin{enumerate}
+	\item
+		\begin{align*}
+			21 &= 3 \cdot 7 \\
+			\left(\mathbb{Z}_{21}^*, \cdot \right) &= \Set{[i]_{21}| i\in \Set{1,2,4,5,8,10,11,13,16,17,19,20}   }
+		\end{align*}
+
+	\item
+		\begin{align*}
+			[8]_{21}^{-1}
+			[10]_{21}^{-1}
+			[17]_{21}^{-1}
+			\text{ existieren, }
+			[9]_{21}^{-1}
+			[14]_{21}^{-1}
+			\text{ nicht}
+		\end{align*}
+		
+	\item
+		\begin{align*}
+			21 &= 2 \cdot 8 + 5 \\
+			8 &= 1 \cdot 5 + 3 \\
+			5 &= 1 \cdot 3 + 2 \\
+			3 &= 1 \cdot 2 + 1 \\
+			2 &= 2 \cdot 1 + 0 \\
+			\Rightarrow 1 &= 3 - 1 \cdot 2\\
+				&= 3 - 1 \cdot (5 - 1 \cdot 3)\\
+			 &= 2 \cdot 3 - 1 \cdot  5 \\ 
+			 &= 2 \cdot (8 - 1 \cdot 5) - 1 \cdot 5 \\
+			 &= 2 \cdot 8 - 3 \cdot 5\\
+			 &= 2 \cdot 8 - 3 \cdot (21 - 2 \cdot 8 )\\
+			 &= 8 \cdot 8 - 3 \cdot 21\\
+			&\Rightarrow [8]_{21}^{-1} = [8]_{21}
+		\end{align*}
+		\begin{align*}
+			21 &= 2 \cdot 10 + 1\\
+			10 &= 10 \cdot 1 + 0\\
+			\Rightarrow 1 &= 21 - 2 \cdot 10 \\
+																 &\Rightarrow [10]_{21}^{-1} = [-2]_{21} = [19]_{21}
+		\end{align*}
+		\begin{align*}
+			21 &= 1 \cdot 17 + 4\\
+			17 &= 4 \cdot 4 + 1 \\
+			4 &= 4 \cdot 1 + 0\\
+			\Rightarrow 1 &= 17 - 4\cdot 4\\
+																&=17 - 4 \cdot (21 - 1 \cdot 17) \\
+									 &= 5 \cdot 17 - 4 \cdot 21\\
+									 &\Rightarrow [17]_{21}^{-1} = [5]_{21}
+		\end{align*}
+\end{enumerate}
+\end{document}

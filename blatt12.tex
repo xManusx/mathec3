@@ -1,0 +1,320 @@
+\documentclass[fleqn,12pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage[ngerman]{babel}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{gauss}
+\usepackage{braket}
+\usepackage{hyperref}
+\usepackage{wasysym}
+\usepackage{scrpage2}
+\usepackage{tikz}
+\usetikzlibrary{intersections}
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\ohead{\pagemark}
+\ihead{Magnus Berendes, matrikelnr}
+\ifoot{\today}
+\ofoot{\blattn}
+%\setheadtopline{1pt}
+\setheadsepline{0.4pt}
+\setfootsepline{0.4pt}
+\usepackage{enumitem}
+\setenumerate[0]{label=\alph*)}
+\newcommand{\id}{\, \mathrm{d}}
+\newcommand{\intl}{\int\displaylimits}
+% New definition of square root:
+% it renames \sqrt as \oldsqrt
+\let\oldsqrt\sqrt
+% it defines the new \sqrt in terms of the old one
+\def\sqrt{\mathpalette\DHLhksqrt}
+\def\DHLhksqrt#1#2{%
+	\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
+	\advance\dimen0-0.2\ht0
+	\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+{\box0\lower0.4pt\box2}}
+
+\newcommand{\karos}[2]{
+	\begin{tikzpicture}
+		\draw[step=0.5cm, color=gray] (0,0) grid (#1 cm , #2 cm);
+	\end{tikzpicture}
+}
+\newcommand{\abs}[1]{
+	\left \vert #1 \right \vert
+}
+\newcommand{\absbb}[1]{
+	\left \Vert #1 \right \Vert
+}
+\newcommand{\BAR}{%
+	\hspace{-\arraycolsep}%
+	\strut\vrule % the `\vrule` is as high and deep as a strut
+	\hspace{-\arraycolsep}%
+}
+
+%TODO
+\newcommand{\blattn}{Blatt 12}
+\begin{document}
+\section*{\blattn}
+Bearbeitet/Zur Korrektur:
+
+\noindent
+\begin{Form}
+	\CheckBox{Aufgabe A34}\\
+	\CheckBox{Aufgabe A35}\\
+	\CheckBox{Aufgabe A36}\\
+	%\CheckBox{Aufgabe A4}
+\end{Form}
+
+\section*{A34}
+\begin{align*}
+y' = \begin{pmatrix} 1 & 1 \\ -1 & 1 \end{pmatrix}y + \begin{pmatrix} \sin(t)\\ \cos(t) \end{pmatrix}
+\end{align*}
+
+\begin{itemize}
+	\item
+Homogene L"osung:
+\begin{align*}
+y' = \begin{pmatrix} 1 & 1 \\ -1 & 1 \end{pmatrix}y
+\end{align*}
+EW:
+\begin{align*}
+\det\begin{pmatrix}1-\lambda & 1 \\ -1 & 1-\lambda\end{pmatrix} = (1-\lambda)^2 + 1 \overset!=& 0\\
+	(1-\lambda)^2 =& -1\\
+	\pm(1-\lambda) =& i\\
+	\Rightarrow& \lambda_1 = 1-i, \lambda_2 = 1+i\\
+\end{align*}
+EV:
+\begin{align*}
+	\lambda=1-i:&\\
+							&\begin{gmatrix}[p]
+		i & 1  &\BAR&0\\
+		-1 & i  &\BAR& 0
+		\rowops
+		\add[-i]{0}{1}
+	\end{gmatrix} \Rightarrow \begin{gmatrix}[p]
+		i & 1  &\BAR&0 \\
+		0 & 0  &\BAR&0
+	\end{gmatrix}\\
+	&\Rightarrow v_2 + iv_1 = 0\\
+	&\Rightarrow v = \begin{pmatrix}i \\ 1 \end{pmatrix}\\
+	\lambda = 1+i:&\\
+														 &\begin{gmatrix}[p]
+	-i & 1 \\
+	-1 & -i
+	\rowops
+\add[i]{0}{1} 
+\end{gmatrix} \Rightarrow \begin{pmatrix}-i & 1\\ 0 & 0 \end{pmatrix}\\
+																						&\Rightarrow v_2 -iv_1 = 0\\
+											&\Rightarrow
+v_2 = \begin{pmatrix} -i\\1\end{pmatrix}
+\end{align*}
+\begin{align*}
+y_H(t) = c_1\begin{pmatrix}i\\1\end{pmatrix}e^{(1-i)t} + c_2\begin{pmatrix}-i\\1\end{pmatrix}e^{(1+i)t}
+\end{align*}
+
+\item
+Spezielle L"osung
+\begin{align*}
+	y_sp &= W(t) \cdot \int W^{-1}(t)b(t) \id t\\
+	W &= \begin{pmatrix} 
+		ie^{(1-i)t} & -ie^{(1+i)t}\\
+e^{(1-i)t} & e^{(1+i)t}
+\end{pmatrix}\\
+W^{-i} &= \frac1{ie^{(1-i)t+(1+i)t} + ie^{(1+i)t+(1-i)t}}\begin{pmatrix}
+e^{(1+i)t} & ie^{(1+i)t}\\
+-e^{(1-i)t} & ie^{(1-i)t} \end{pmatrix}\\
+&= \frac{1}{2ie^{2t}}
+\begin{pmatrix}
+e^{(1+i)t} & ie^{(1+i)t}\\
+-e^{(1-i)t} & ie^{(1-i)t} \end{pmatrix}\\
+										 &= \begin{pmatrix}
+	\frac1{2i} e^{(-1+i)t} & \frac12 e^{(-1+i)t}\\
+	-\frac{1}{2i} e^{(-1-i)t} & -\frac12 e^{(-1-i)t}\\
+\end{pmatrix}\\
+b(t) &= \begin{pmatrix}\sin(t)\\\cos(t)\end{pmatrix}
+\end{align*}
+\begin{align*}
+	y_{SP} &= 
+	\begin{pmatrix} 
+		ie^{(1-i)t} & -ie^{(1+i)t}\\
+e^{(1-i)t} & e^{(1+i)t}
+\end{pmatrix} \cdot \int
+%---
+\begin{pmatrix}
+	\frac1{2i} e^{(-1+i)t} & \frac12 e^{(-1+i)t}\\
+	-\frac{1}{2i} e^{(-1-i)t} & -\frac12 e^{(-1-i)t}\\
+\end{pmatrix} \begin{pmatrix} \sin(t) \\ \cos(t) \end{pmatrix} \id t \\
+	&=
+	\begin{pmatrix} 
+		ie^{(1-i)t} & -ie^{(1+i)t}\\
+e^{(1-i)t} & e^{(1+i)t}
+\end{pmatrix} \cdot \int
+%---
+\frac12 \begin{pmatrix}
+-i \sin(t)e^{(-1+i)t} +  \cos(t)e^{(-1+i)t}\\
+	-i \sin(t)e^{(-1-i)t} - \cos(t)e^{(-1-i)t}
+\end{pmatrix} \id t \\
+	&=
+	\begin{pmatrix} 
+		ie^{(1-i)t} & -ie^{(1+i)t}\\
+e^{(1-i)t} & e^{(1+i)t}
+\end{pmatrix} \cdot \int
+%---
+\frac12 \begin{pmatrix}
+	e^{(-1+i)t}(\cos(t) -i \sin(t))\\
+	e^{(-1-i)t}(-\cos(t) -i\sin(t))\\
+\end{pmatrix} \id t \\
+	&=
+	\begin{pmatrix} 
+		ie^{(1-i)t} & -ie^{(1+i)t}\\
+e^{(1-i)t} & e^{(1+i)t}
+\end{pmatrix} \cdot \int
+%---
+\frac12 \begin{pmatrix}
+	e^{-t+ti}e^{-it}\\
+	-e^{-t-ti}e^{it}
+\end{pmatrix} \id t \\
+	&=
+	\begin{pmatrix} 
+		ie^{(1-i)t} & -ie^{(1+i)t}\\
+e^{(1-i)t} & e^{(1+i)t}
+\end{pmatrix} \cdot \int
+%---
+\frac12 \begin{pmatrix}
+	e^{-t}\\
+	-e^{-t}
+\end{pmatrix} \id t \\
+	&=
+	\begin{pmatrix} 
+		ie^{(1-i)t} & -ie^{(1+i)t}\\
+e^{(1-i)t} & e^{(1+i)t}
+\end{pmatrix} \cdot
+%---
+\frac12 \begin{pmatrix}
+	-e^{-t}\\
+	e^{-t}
+\end{pmatrix} \\
+&=\frac12\begin{pmatrix}
+-ie^{-it} + ie^{it}\\
+e^{-it} + e^{it}
+\end{pmatrix} = \begin{pmatrix} -\sin(t) \\ \cos(t) \end{pmatrix} \\
+\end{align*}
+
+
+\item
+	Allgemeine Inhomogene L"osung:
+	\begin{align*}
+		y(t) = y_H(t) + y_{SP}(t) = 
+	c_1\begin{pmatrix}i\\1\end{pmatrix}e^{(1-i)t} + c_2\begin{pmatrix}-i\\1\end{pmatrix}e^{(1+i)t} + \begin{pmatrix} -\sin(t)\\ \cos(t) \end{pmatrix}
+	\end{align*}
+
+\end{itemize}
+
+
+\section*{A35}
+\begin{enumerate}
+	\item
+		Aus Gewohnheitsgr"unden: $x\rightarrow y $
+		\begin{align*}
+			y'' + \frac{\gamma}m y' = -g
+		\end{align*}
+		\begin{itemize}
+			\item
+				Homogene L"osung:
+				\begin{align*}
+					\lambda^2 + \frac{\gamma}m\lambda &\overset!= 0\\
+					\lambda(\lambda+\frac{\gamma}m) &= 0\\
+					&\Rightarrow \lambda_1 = 0,\, \lambda_2 = -\frac{\gamma}m
+				\end{align*}
+				\begin{align*}
+					y_H = c_1 + c_2e^{-\frac{\gamma}m t}
+				\end{align*}
+			\item
+				Spezielle L"osung:
+				\begin{align*}
+					y_{S} &= tA\\
+					y'_S &= A\\
+					y''_S &= 0\\
+								&\Rightarrow \text{Einsetzen in inhomogene DGL}\\
+						 &0 + \frac{\gamma}mA = -g\\
+						 &\Rightarrow A = -\frac{gm}\gamma,\, y_S(t) = -\frac{gmt}\gamma  
+				\end{align*}
+			\item
+				Allgemeine inhomogene L"osung:
+				\begin{align*}
+					y(t) = c_1 + c_2e^{-\frac\gamma{m}t} -\frac{gmt}\gamma
+				\end{align*}
+		\end{itemize}
+	\item
+		\begin{align*}
+			y'(t) &= -\frac{\gamma}mc_2e^{-\frac\gamma{m}t} - \frac{gm}\gamma\\
+			y(0) &= 2000\\
+			y'(0) &= 0\\
+			m &= 80\\
+			g &= 3.71 \text{  (Mars)}\\
+			\gamma &= \underbrace{-\frac12 \cdot c_W \cdot A \cdot \rho}_{\text{von \url{http://bit.ly/1V8IpAu}}} \\
+			&\approx -\frac12 \cdot \underbrace{0.78}_{\text{stehender Mensch}} \cdot \underbrace{0.09}_{\text{ca. Fl"ache Mensch}} 
+									 \cdot \underbrace{0.0069715}_{\text{Luftdichte auf dem Mars}} \\
+									 & & \approx -0.000245
+		\end{align*}
+								 \item
+		\begin{align*}
+			c_1 + c_2 = 2000\\
+			-\frac\gamma{m}c_2 - \frac{gm}\gamma = 0\\
+			c_2 = -\frac{gm^2}{\gamma^2}\\
+			\Rightarrow c_2 = -29054560599.750107\\
+			\Rightarrow c_1 = -29054562599.750107
+		\end{align*}
+	\item
+		\begin{align*}
+			y'(t) = -\frac{\gamma}m c_2e^{-\frac\gamma{m}t} - \frac{g m}\gamma\\
+			\lim_{t\rightarrow \infty} y'(t) = -\frac{gm}\gamma
+		\end{align*}
+		
+	\item
+		$\gamma$ h"angt ist proportional zur Gr"o"se des fallenden Objekts, je gr"o"ser der Fallschirm, desto gr"o"ser $\gamma$, desto kleiner der Betrag von $-\frac{gm}\gamma$
+
+\end{enumerate}
+
+
+\section*{A36}
+		\begin{align*}
+			y''' + a_2y'' + a_1y' + a_0y = f(t)
+		\end{align*}
+\begin{enumerate}
+	\item
+		\begin{align*}
+			y(t) &= (c_1 + c_2t + c_3t^2)e^{-2t}\\
+							&\Rightarrow \text{ Dreifacher Eigenwert } -2\\
+						 &\Rightarrow(\lambda +2)^3 =  \lambda^3+6 \lambda^2+12 \lambda+8\\
+						 &\Rightarrow a_2 = 6, a_1 = 12, a_0 = 8, f(t) = 0\\
+					&\Rightarrow y''' + 6y'' + 12y' + 8y = 0
+		\end{align*}
+
+	\item
+		\begin{align*}
+			y(t) &=c_1te^t + c_2e^{7t} + c_3e^{-5t}\\
+							&\Rightarrow \lambda_{1,2} = 1, \lambda_3 = 7, \lambda_4=-5\\
+						 &\Rightarrow \text{ Nicht m"oglich 4 EW bei einer DGL 3. Grades zu bekommen}
+		\end{align*}
+
+	\item
+		\begin{align*}
+			y(t) &= c_1e^t + c_2\sin(t) + c_3 \cos(t) + t^4\\
+							&\Rightarrow \lambda_1 = 1, \lambda_{2,3}= \pm i\\
+						 &\Rightarrow (\lambda -1)(\lambda^2+1) = \lambda^3 -\lambda^2+\lambda -1\\
+			y_H &= c_1e^t + c_2\sin(t) + c_3\cos(t)\\
+			y_S &= t^4\\
+			DGL_H &= y''' - y'' + y' - y = 0\\
+						&a_2 = -1, a_1 = 1, a_2 = -1, f(t) =  -t^4 + 4 t^3 - 12 t^2 + 24 t
+		\end{align*}
+
+	\item
+		\begin{align*}
+			y(t) = c_1e^t + c_2\sin(t) + c_3\sin(2t) + t^4
+		\end{align*}
+		Nicht m"oglich, da man immer Paare von komplex-konjugierten Eigenwerten haben muss, woraus folgt, dass man ein Paar bestehend aus $e^{at}\cos(bt)$ und $e^{at}\sin(bt)$. Hier sind sowohl zwei mal Sinuse, als auch unterschiedliche $b$s.
+\end{enumerate}
+\end{document}

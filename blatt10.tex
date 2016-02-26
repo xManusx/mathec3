@@ -1,0 +1,191 @@
+\documentclass[fleqn,12pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage[ngerman]{babel}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{gauss}
+\usepackage{braket}
+\usepackage{hyperref}
+\usepackage{wasysym}
+\usepackage{scrpage2}
+\usepackage{tikz}
+\usetikzlibrary{intersections}
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\ohead{\pagemark}
+\ihead{Magnus Berendes, matrikelnr}
+\ifoot{\today}
+\ofoot{\blattn}
+%\setheadtopline{1pt}
+\setheadsepline{0.4pt}
+\setfootsepline{0.4pt}
+\usepackage{enumitem}
+\setenumerate[0]{label=\alph*)}
+\newcommand{\id}{\, \mathrm{d}}
+\newcommand{\intl}{\int\displaylimits}
+% New definition of square root:
+% it renames \sqrt as \oldsqrt
+\let\oldsqrt\sqrt
+% it defines the new \sqrt in terms of the old one
+\def\sqrt{\mathpalette\DHLhksqrt}
+\def\DHLhksqrt#1#2{%
+	\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
+	\advance\dimen0-0.2\ht0
+	\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+{\box0\lower0.4pt\box2}}
+
+\newcommand{\karos}[2]{
+	\begin{tikzpicture}
+		\draw[step=0.5cm, color=gray] (0,0) grid (#1 cm , #2 cm);
+	\end{tikzpicture}
+}
+\newcommand{\abs}[1]{
+	\left \vert #1 \right \vert
+}
+\newcommand{\absbb}[1]{
+	\left \Vert #1 \right \Vert
+}
+
+%TODO
+\newcommand{\blattn}{Blatt 10}
+\begin{document}
+\section*{\blattn}
+Bearbeitet/Zur Korrektur:
+
+\noindent
+\begin{Form}
+	\CheckBox{Aufgabe A28}\\
+	\CheckBox{Aufgabe A29}\\
+	\CheckBox{Aufgabe A30}\\
+	%\CheckBox{Aufgabe A4}
+\end{Form}
+
+\section*{A28}
+\begin{enumerate}
+	\item
+\begin{align*}
+	y' &= \abs{y}^{\frac23},\, y(0) = 0\\
+	f(x)&:= \abs{x}^{\frac23}\\
+				&f(x) \text{ stetig in } \mathbb{R} \Rightarrow \exists \text{ eine lokale L"osung}
+\end{align*}
+\item
+	Vorraussetzung f"ur Satz: $f(x)$ Lipschitz-stetig:
+	\begin{align*}
+		\abs{f(x) - f(y)} &\leq L\cdot \abs{x-y},\, L \in \mathbb{R}
+	\end{align*}
+	\begin{align*}
+																	 x > 0 :&
+		f(x) = x^{\frac23} \\
+		&\Rightarrow f'(x) = \frac2{3\oldsqrt[3]{x}} \text{ ist lokal beschr"ankt}\\
+											  & \Rightarrow
+		\text{ L existiert lokal } \Rightarrow f \text{ lokal L-stetig}\\
+		x < 0 :&
+		\text{ analog zu } x > 0 \text{, da }\abs{ \cdot }\\
+		x = 0 :&
+		\lim_{x\rightarrow +0} f'(x) = \lim_{x \rightarrow +0} \frac2{3\oldsqrt[3]{x}} = \infty \text{ und damit nicht beschr"ankt}\\
+		  & \Rightarrow \text{ nicht L-stetig}
+	\end{align*}
+	Damit kann der Satz nicht angewendet werden, garantiert uns also nichts.
+\item
+	$y(t) = 0$
+\item
+	\begin{align*}
+		y'&=\abs{y}^{\frac23}\\
+		\frac{\id y}{\id t} &= \abs{y}^{\frac23}\\
+		\int \frac1{\abs{y}^{\frac23}} \id y &= \int 1 \id t\\
+		\int {y}^{-\frac23} \id y &= t\\
+																						 &\text{(da uns nur L"osungen $y\geq 0$ interessieren,}\\
+																&\text{k"onnen Betragsstriche gl"ucklicherweise vernachl"assigt werden)}\\
+		3 y^{\frac13} &= t\\
+		3{\oldsqrt[3]{y}} &= t\\
+		y &= \frac{t^3}{27} + C\\
+		y(0) &= 0 \Rightarrow \, C=0
+	\end{align*}
+\item
+	\begin{align*}
+		y' &= \abs{y}^{\frac23}\\
+	\frac1{9}t^2 &= \abs{\frac{t^3}{27}}^{\frac23}\\
+		\frac1{9}t^2 &= \abs{\frac{t}{3}}^2 = \frac19 t^2\\
+		y(0) &= \frac0{27} = 0
+	\end{align*}
+\item
+	Im Fall $y(t) = \frac{t^3}{27}$ nimmt die Masse des Regentropfens - in Abh"angigkeit der Zeit - kubisch zu. Im Fall $y(t) = 0$ gibt es keinen Staubpartikel an dem sich ein neuer Tropfen bilden k"onnte
+
+	\section*{A29}
+	\begin{enumerate}
+		\item
+			\begin{align*}
+			y' = My,\, y(0) = \begin{pmatrix} 3\\3\\3\end{pmatrix},\, M = \begin{pmatrix}
+				1 & 2 & -1\\
+				2 & 4 & -2 \\
+			-1 & -2 & 1 \end{pmatrix}
+			\end{align*}
+			Berechnung der Eigenwerte:
+			\begin{align*}
+				&\det\begin{pmatrix}
+					1-\lambda & 2 & -1\\
+					2 & 4 -\lambda & -2\\
+					-1 & -2 & 1-\lambda
+				\end{pmatrix} \overset!= 0\\
+				0 &= (1-\lambda)^2(4-\lambda)+8-(4-\lambda)-8(1-\lambda)\\
+					&= \lambda^3 + 6\lambda^2\\
+				 &= \lambda^2(6-\lambda)\\
+				 &\Rightarrow \lambda_1 = 0,\, \lambda_2 = 6
+			\end{align*}
+			Berechnung der dazugeh"origen Eigenr"aume:
+			\begin{align*}
+				&\lambda = 0:\\
+				&\begin{gmatrix}[p]
+					1&2 & -1\\
+					2 & 4 & -2\\
+					-1 & -2 & 1
+					\rowops
+					\add[-\frac12]{0}{1}
+					\add{0}{2}
+				\end{gmatrix} = \begin{pmatrix} 1 & 2 & -1 \\ 0 & 0 & 0 \\ 0 & 0 &0\end{pmatrix}\\
+																					 &\Rightarrow x_1 = x_3 -2x_2\\
+			\end{align*}
+			\begin{align*}
+			ER_0 = \Set{ c_1 \begin{pmatrix} -2\\1\\0\end{pmatrix} + c_2 \begin{pmatrix} 1 \\ 0 \\ 1\end{pmatrix} |  c_1, c_2 \in \mathbb{R}}
+			\end{align*}
+			\begin{align*}
+			&\lambda = 6:\\
+			 &\begin{gmatrix}[p]
+					-5 & 2 & -1\\
+					2 & -2 & -2 \\
+					-1 & -2 & -5
+					\rowops
+					\add{2}{0}
+					\add{2}{1}
+				\end{gmatrix} = \begin{gmatrix}[p]
+					6 & 0 & 6 \\
+				0 & 1 & 2\\
+					1 & 2 & 5 
+					\rowops
+					\mult{0}{\cdot \frac16}
+					\add[-\frac16]{0}{2}
+				\end{gmatrix} =\\
+				&	= \begin{gmatrix}[p]
+					1 & 0 & 1\\
+					0 & 1 & 2\\
+					0 & 2 & 4
+					\rowops
+					\add[-2]{1}{2}
+				\end{gmatrix} = \begin{pmatrix} 1 & 0 & 1\\ 0 & 1 & 2\\ 0 & 0 & 0\end{pmatrix}\\
+																					 &\Rightarrow x_1 = -x_3,\, x_2 = -2x_3\\
+			\end{align*}
+			\begin{align*}
+			ER_6 = \Set{c_1 \begin{pmatrix}-1\\-2\\1\end{pmatrix} | c_1 \in \mathbb{R}}
+			\end{align*}
+			\begin{align*}
+			y(t) = c_1 \begin{pmatrix} -1 \\ -2 \\ 1 \end{pmatrix}\cdot e^{6t} + c_2\begin{pmatrix}-2 \\ 1 \\ 0 \end{pmatrix} + c_3 \cdot \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}
+			\end{align*}
+
+	\end{enumerate}
+
+
+\end{enumerate}
+
+\end{document}

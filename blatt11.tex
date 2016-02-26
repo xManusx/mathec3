@@ -1,0 +1,240 @@
+\documentclass[fleqn,12pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage[ngerman]{babel}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{gauss}
+\usepackage{braket}
+\usepackage{hyperref}
+\usepackage{wasysym}
+\usepackage{scrpage2}
+\usepackage{tikz}
+\usetikzlibrary{intersections}
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\ohead{\pagemark}
+\ihead{Magnus Berendes, matrikelnr}
+\ifoot{\today}
+\ofoot{\blattn}
+%\setheadtopline{1pt}
+\setheadsepline{0.4pt}
+\setfootsepline{0.4pt}
+\usepackage{enumitem}
+\setenumerate[0]{label=\alph*)}
+\newcommand{\id}{\, \mathrm{d}}
+\newcommand{\intl}{\int\displaylimits}
+% New definition of square root:
+% it renames \sqrt as \oldsqrt
+\let\oldsqrt\sqrt
+% it defines the new \sqrt in terms of the old one
+\def\sqrt{\mathpalette\DHLhksqrt}
+\def\DHLhksqrt#1#2{%
+	\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
+	\advance\dimen0-0.2\ht0
+	\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+{\box0\lower0.4pt\box2}}
+
+\newcommand{\karos}[2]{
+	\begin{tikzpicture}
+		\draw[step=0.5cm, color=gray] (0,0) grid (#1 cm , #2 cm);
+	\end{tikzpicture}
+}
+\newcommand{\abs}[1]{
+	\left \vert #1 \right \vert
+}
+\newcommand{\absbb}[1]{
+	\left \Vert #1 \right \Vert
+}
+
+\newcommand{\BAR}{%
+	\hspace{-\arraycolsep}%
+	\strut\vrule % the `\vrule` is as high and deep as a strut
+	\hspace{-\arraycolsep}%
+}
+
+\newcommand{\blattn}{Blatt 11}
+\begin{document}
+\section*{\blattn}
+Bearbeitet/Zur Korrektur:
+
+\noindent
+\begin{Form}
+	\CheckBox{Aufgabe A31}\\
+	\CheckBox{Aufgabe A32}\\
+	\CheckBox{Aufgabe A33}\\
+	%\CheckBox{Aufgabe A4}
+\end{Form}
+
+\section*{A31}
+\begin{align*}
+y' = Ay,\, A = \begin{pmatrix} 3 & 9\\ -4 & -9 \end{pmatrix},\, y(0) = \begin{pmatrix} 1\\1\end{pmatrix}
+\end{align*}
+EW:
+\begin{align*}
+\det\begin{pmatrix} 3-\lambda & 9 \\ -4 & -9 -\lambda\end{pmatrix} = (3-\lambda)(-9-\lambda)+36 \overset!= 0\\
+	\lambda^2 + 6\lambda + 9 = 0\\
+	(\lambda +3)^2 = 0\\
+	\Rightarrow \lambda = -3
+\end{align*}
+EV:
+\begin{align*}
+	\begin{gmatrix}[p]
+		6 & 9 & \BAR &0\\
+		-4 & -6 &\BAR &0 
+		\rowops
+		\add[\frac23]{0}{1}
+	\end{gmatrix}= \begin{gmatrix}[p]
+		6 & 9 & \BAR & 0\\
+		0 & 0 & \BAR & 0
+	\end{gmatrix}\\
+2v_1 + 3v_2 = 0 \Rightarrow v_1 = -3, v_2 = 2, v = \begin{pmatrix} -3 \\ 2 \end{pmatrix}
+\end{align*}
+HV: 
+\begin{align*}
+	\begin{gmatrix}[p]
+		6 & 9 & \BAR &-3\\
+		-4 & -6 &\BAR &2 
+		\rowops
+		\add[\frac23]{0}{1}
+	\end{gmatrix} = \begin{gmatrix}[p] 6 & 9 & \BAR & -3\\ 0 & 0 & \BAR & 0\rowops \mult{0}{\cdot\frac{1}{3}}\end{gmatrix}
+	= \begin{pmatrix} 2 & 3 & \BAR & -1 \\ 0 & 0 & \BAR & 0 \end{pmatrix}\\
+	h = \begin{pmatrix}1 \\ -1 \end{pmatrix}\\
+\end{align*}
+Allgemeine L"osung:
+\begin{align*}
+y(t) = c_1\begin{pmatrix}-3 \\ 2\end{pmatrix}e^{-3t} + c_2 \left[ \begin{pmatrix} 1 \\ -1 \end{pmatrix} + t\cdot\begin{pmatrix}-3 \\ 2 \end{pmatrix}\right]e^{-3t}
+\end{align*}
+AW:
+\begin{align*}
+&c_1\begin{pmatrix} -3 \\ 2\end{pmatrix} + c_2\begin{pmatrix}1\\-1\end{pmatrix}= \begin{pmatrix} 1\\1\end{pmatrix}\\
+	&\Rightarrow c_1 = -2\\
+	&\Rightarrow c_2 = -5\\
+	&y(t) = 
+ -2\begin{pmatrix}-3 \\ 2\end{pmatrix}e^{-3t} + -5 \left[ \begin{pmatrix} 1 \\ -1 \end{pmatrix} + t\cdot\begin{pmatrix}-3 \\ 2 \end{pmatrix}\right]e^{-3t}
+\end{align*}
+
+
+
+\section*{A32}
+\begin{align*}
+	y' = \begin{pmatrix}
+		0 & 1 & -2\\
+	1 & 0 & -2\\
+1 & 1 & -3 \end{pmatrix}y
+\end{align*}
+EW:
+\begin{align*}
+	\det\begin{pmatrix}
+		-\lambda & 1 & -2 \\
+		1 & -\lambda & -2 \\
+	1 & 1 & -3-\lambda \end{pmatrix} = 
+		\lambda^2(-3-\lambda)-4-4\lambda - (-3-\lambda) \overset!= 0 \\
+		-3 \lambda^2 - \lambda^3 - 1 -3 \lambda = \lambda^3 + 3\lambda^2 + 3\lambda + 1 = 0\\
+		\Rightarrow \lambda_1 = -1 \text{(erraten)}\\ 
+		(\lambda^3 + 3\lambda^2 + 3 \lambda + 1) : (\lambda + 1) = \lambda^2 + 2\lambda + 1 = (\lambda + 1)^2\\
+		\Rightarrow \lambda_{2,3} = -1\\
+\end{align*}
+EV:
+\begin{align*}
+	\lambda=-1:&\\
+						 &\begin{gmatrix}[p]
+	1 & 1 & -2 &\BAR&0 \\
+	1 & 1 & -2  &\BAR&0\\
+	1 & 1 & -2  &\BAR&0
+	\end{gmatrix} = \begin{gmatrix}[p]
+		1 & 1 & -2  &\BAR& 0\\
+		0 & 0 &  0 &\BAR& 0\\
+		0 & 0 & 0  &\BAR&0
+	\end{gmatrix}\\
+\text{z.B. } &v_{1} = \begin{pmatrix} 2 \\ 0 \\ 1\end{pmatrix}, v_2 = \begin{pmatrix}-1\\1\\0\end{pmatrix}\\
+\end{align*}
+\begin{align*}
+ER=\Set{\alpha\begin{pmatrix}2\\0\\1\end{pmatrix}+\beta\begin{pmatrix}-1\\1\\0 \end{pmatrix}|\alpha,\beta \in \mathbb{R}}\\
+	\Rightarrow \text{ Es wird ein Hauptvektor ben"otigt}
+\end{align*}
+\begin{align*}
+	h: &\begin{gmatrix}[p]
+		1 & 1 & -2 & -2 & 1 & \BAR&0 \\
+		1 & 1 & -2  & 0 & -1 &\BAR&0\\
+		1 & 1 & -2  & -1 & 0 &\BAR&0
+		\rowops
+		\add[-1]{0}{1}
+		\add[-1]{0}{2}
+	\end{gmatrix}\\
+	\Rightarrow &\begin{gmatrix}[p]
+		1 & 1 & -2 & -2 & 1 & \BAR&0 \\
+		0 & 0 & 0  & 2 & -2 &\BAR&0\\
+		0 & 0 & 0  & 1 & -1 &\BAR&0
+	\end{gmatrix} 
+	\Rightarrow &\begin{gmatrix}[p]
+		1 & 1 & -2 & -2 & 1 & \BAR&0 \\
+		0 & 0 & 0  & 2 & -2 &\BAR&0\\
+		0 & 0 & 0  & 0 & 0 &\BAR&0
+	\end{gmatrix} \\
+	\Rightarrow & \alpha = \beta \\
+	\Rightarrow & h_1 + h_2 - 2 h_3 -\alpha = 0\\
+\text{z.B.: }& h = \begin{pmatrix}1\\1\\0\end{pmatrix}, \alpha = \beta=2
+\end{align*}
+
+
+Allgemeine L"osung:
+\begin{align*}
+y(t) = c_1 \begin{pmatrix}2\\0\\1\end{pmatrix}e^{-t} + c_2 \begin{pmatrix}-1\\1\\0\end{pmatrix}e^{-t} + c_3\left[\begin{pmatrix}1\\1\\0\end{pmatrix} + t\begin{pmatrix} 2\\2\\2\end{pmatrix}\right]e^{-t}
+\end{align*}
+
+
+
+\section*{A33}
+\begin{align*}
+	&y'''' - 2y'' + y = 0,\, y(0) = 0, y'(0) = 1, y''(0) = -2, y'''(0) = 3\\
+	&\lambda^4 -2\lambda^2 + 1 = 0\\
+	\Rightarrow& (\lambda^2 - 1)^2 = 0\\
+	\Rightarrow& \lambda_{1,2} = 1,\, \lambda_{3,4} = -1
+\end{align*}
+Allgemeine L"osung:
+\begin{align*}
+	y(t) &= 
+					  c_1e^{t} + tc_2e^{t} + c_3e^{-t} + tc_4e^{-t}\\
+						y' &= c_1e^t + tc_2e^t + c_2e^t -c_3e^{-t} - tc_4e^{-t} + c_4e^{-t}\\
+						y'' &=
+						c_1e^{t} + tc_2e^{t} + 2c_2e^t + c_3e^{-t} +tc_4e^{-t} - 2c_4e^{-t})\\
+						y''' &= c_1e^t + tc_2e^t + 3c_2e^t -c_3e^{-t} - tc_4e^{-t} + 3c_4e^{-t}
+\end{align*}
+AW:
+\begin{align*}
+	y(0) &=0\\
+	y'(0) &= 1\\
+	y''(0) &=-2\\
+	y'''(0) &= 3\\
+	\Rightarrow &\begin{gmatrix}[p]
+	1 & 0 & 1 & 0  &\BAR&0 \\
+	1 & 1 & -1 & 1  &\BAR&1\\
+	1 & 2 & 1 & -2  &\BAR&-2\\
+	1 & 3 & -1 & 3   &\BAR& 3
+	\rowops
+	\add[-1]{0}{1}
+	\add[-1]{0}{2}
+	\add[-1]{0}{3}
+\end{gmatrix} \Rightarrow \begin{gmatrix}[p]
+	1 & 0 & 1 & 0 &\BAR&0\\
+	0 & 1 & -2 & 1 & \BAR& 1\\
+	0 & 2 & 0 & -2  &\BAR& -2\\
+	0 & 3 & -2 & 3  &\BAR& 3
+	\rowops
+	\add[-2]{1}{2}
+	\add[-3]{1}{3}
+\end{gmatrix}\\
+\Rightarrow &\begin{gmatrix}[p]
+1 & 0 & 1 & 0 &\BAR& 0\\
+0 & 1 & -2 & 1 &\BAR& 1\\
+0 & 0 & 4 & -4  &\BAR& -4\\
+0 & 0 & 4 & 0  &\BAR& 0
+\end{gmatrix}\\
+\Rightarrow &c_3 = 0 \Rightarrow c_4 = 1 \Rightarrow c_2 = 0 \Rightarrow  c_1 = 0\\
+\Rightarrow &y(t) = te^{-t}
+\end{align*}
+
+
+\end{document}

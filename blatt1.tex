@@ -1,0 +1,168 @@
+\documentclass[fleqn,13pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage[ngerman]{babel}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[fleqn]{amsmath}
+\usepackage{nccmath}
+\usepackage{hyperref}
+\usepackage{scrpage2}
+\usepackage{enumitem}
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\ohead{\pagemark}
+\ihead{Magnus Berendes, matrikelnr}
+\ifoot{\today}
+\ofoot{Blatt 1}
+%\setheadtopline{1pt}
+
+\setenumerate[0]{label=\alph*)}
+\setheadsepline{0.4pt}
+
+\begin{document}
+\section*{Blatt 1}
+\subsection*{Aufgabe A1}
+
+\begin{enumerate}
+	\item
+		\begin{equation*}
+			g(x,y,z) = x^2 + y^3 + z^4 
+		\end{equation*}
+
+		\begin{equation*}
+			\nabla_g(x,y,z) =
+			\begin{pmatrix}
+				2x \\
+				3y^2 \\
+				4z^3
+			\end{pmatrix}
+		\end{equation*}
+		\begin{equation*}
+			\mathcal{H}_g(x,y,z) =
+			\begin{pmatrix}
+				2 & 0 & 0 \\
+				0 & 6y & 0 \\
+				0 & 0 & 12z^2
+			\end{pmatrix}
+		\end{equation*}
+		\begin{equation*}
+			\mathcal{H}_g(3,3,-4) =
+			\begin{pmatrix}
+				2 & 0 & 0 \\
+				0 & 18 & 0 \\
+				0 & 0 & 184
+			\end{pmatrix}
+		\end{equation*}
+
+		Bei einer Diagnoalmatrix gilt: $\text{EW}_i = a_{i,i}$, die Eigenwerte sind also $2, 18, 184$
+
+		$\Rightarrow \mathcal{H}_g(3,3,-4)$ positiv definit
+
+	\item
+
+		\begin{equation*}
+			h(x,y) = xy\cos(y)
+		\end{equation*}
+		\begin{equation*}
+			\nabla_h(x,y) =
+			\begin{pmatrix}
+				y\cos(y)\\
+				x\cos(y) - xy\sin(y)\\
+			\end{pmatrix}
+			=
+			\begin{pmatrix}
+				y\cos(y)\\
+				x(\cos(y) - y\sin(y))\\
+			\end{pmatrix}
+		\end{equation*}
+		\begin{equation*}
+			\mathcal{H}_h(x,y) = 
+			\begin{pmatrix}
+				0 & \cos(y) - y\sin(y)\\
+				\cos(y) - y\sin(y) & -x(2\sin(y) + y\cos(y))
+			\end{pmatrix}
+		\end{equation*}
+		\begin{equation*}
+			\mathcal{H}_h(1, \frac\pi2) = 
+			\begin{pmatrix}
+				0 & -\frac\pi2\\
+				-\frac\pi2 & -2
+			\end{pmatrix}
+		\end{equation*}
+		Charakteristisches Polynom von $\mathcal{H}_h(1, \frac\pi2) = -\lambda \cdot (-2 - \lambda) - (\frac\pi2)^2 = \lambda^2 +2\lambda - \frac{\pi^2}4$
+		\begin{equation*}
+			\Rightarrow \lambda_{1,2} = \frac{-2 \pm \sqrt{4 + \pi^2}}2 = -1 \pm \sqrt{1 + \frac{\pi^2}4}
+		\end{equation*}
+
+		\begin{equation*}
+			\sqrt{1 + \frac{\pi^2}4} > 1 \Rightarrow (\lambda_1 > 0, \lambda_2 < 0) \Rightarrow \text{Die Matrix ist indefinit}
+		\end{equation*}
+
+\end{enumerate}
+
+\subsection*{Aufgabe A2}
+\begin{enumerate}
+	\item
+		\begin{equation*}
+			f(x,y) = \frac52x^2 + y^2 -3xy + x - y
+		\end{equation*}
+		\begin{equation*}
+			\nabla_f(x,y) = 
+			\begin{pmatrix}
+				5x - 3y + 1\\
+				2y - 3x - 1
+			\end{pmatrix} \overset{!}{=} 0
+		\end{equation*}
+	$\Rightarrow x = 1; y = 2$, $\begin{pmatrix}1 \\2\end{pmatrix}$ station"arer Punkt von $f(x,y)$
+
+	\item
+		\begin{equation*}
+			\mathcal{H}_f(x,y) =
+			\begin{pmatrix}
+				5 & -3 \\
+				-3 & 2
+			\end{pmatrix}
+		\end{equation*}
+		Charakteristisches Polynom von $\mathcal{H}_f(1,2) = (5-\lambda)(2-\lambda)-9 = \lambda^2 - 7\lambda + 1 \overset{!}{=} 0$
+		\begin{equation*}
+			\lambda_{1,2} = \frac{7 \pm \sqrt{45}}2; \lambda_1 = 6.85\text{\dots} > 0; \lambda_2 = 0.15\text{\dots} > 0
+		\end{equation*}
+	$\Rightarrow$ Alle EW $>0$ $\Rightarrow$ Matrix positiv definit $\Rightarrow$ $\begin{pmatrix}1\\2\end{pmatrix}$ Minimum
+
+
+\end{enumerate}
+
+\subsection*{Aufgabe A3}
+
+\begin{enumerate}
+
+	\item
+		\begin{equation*}
+			f(x,y) = \ln(x) + y
+		\end{equation*}
+		\begin{equation*}
+			y = -\frac{x^4}4
+		\end{equation*}
+		($x^4 > 0 \Rightarrow y < 0$)
+		\begin{equation*}
+			\tilde f(x) = \ln(x) - \frac{x^4}4
+		\end{equation*}
+		\begin{equation*}
+			\tilde f'(x) = \frac1x - x^3 = \frac1x(1 - x^4)\overset!= 0 \Rightarrow x_{1,2} = \pm1; \text{ ($x_2$ f"allt weg, da $x \overset!> 0$)}
+		\end{equation*}
+		\begin{equation*}
+			\tilde f''(x) = -x^{-2} -3x^2 = -\frac1{x^2} - 3x^2
+		\end{equation*}
+		\begin{equation*}
+			\tilde f''(1) = -4, \tilde f(1) = -\frac14
+		\end{equation*}
+
+	$\Rightarrow \tilde f(x)$ ist im Punkt $\begin{pmatrix}1\\ -\frac14\end{pmatrix}$ rechtsgekr"ummt, $\begin{pmatrix}1\\ -\frac14\end{pmatrix}$ ist also ein Maximum von $\tilde f(x)$ und damit ein Maximum von $f(x,y)$ unter der Nebenbedingung $y + \frac{x^4}4 = 0$
+
+
+
+\end{enumerate}
+
+\end{document}
+

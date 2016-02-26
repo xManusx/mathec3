@@ -1,0 +1,236 @@
+\documentclass[fleqn,12pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage[ngerman]{babel}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{wasysym}
+\usepackage{scrpage2}
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\ohead{\pagemark}
+\ihead{Magnus Berendes, matrikelnr}
+\ifoot{\today}
+\ofoot{\blattn}
+%\setheadtopline{1pt}
+\setheadsepline{0.4pt}
+\setfootsepline{0.4pt}
+\usepackage{enumitem}
+\setenumerate[0]{label=\alph*)}
+\newcommand{\id}{\, \mathrm{d}}
+\newcommand{\intl}{\int\displaylimits}
+% New definition of square root:
+% it renames \sqrt as \oldsqrt
+\let\oldsqrt\sqrt
+% it defines the new \sqrt in terms of the old one
+\def\sqrt{\mathpalette\DHLhksqrt}
+\def\DHLhksqrt#1#2{%
+	\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
+	\advance\dimen0-0.2\ht0
+	\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+{\box0\lower0.4pt\box2}}
+
+\usepackage{tikz}
+\newcommand{\karos}[2]{
+	\begin{tikzpicture}
+		\draw[step=0.5cm, color=gray] (0,0) grid (#1 cm , #2 cm);
+	\end{tikzpicture}
+}
+\usetikzlibrary{intersections}
+\newcommand{\abs}[1]{
+	\left \vert #1 \right \vert
+}
+\newcommand{\absbb}[1]{
+	\left \Vert #1 \right \Vert
+}
+
+%TODO hier blatt!
+\newcommand{\blattn}{Blatt 6}
+\setcounter{MaxMatrixCols}{20}
+\begin{document}
+\section*{\blattn}
+Bearbeitet/Zur Korrektur:
+
+\noindent
+\begin{Form}
+	\CheckBox{Aufgabe A16}\\
+	\CheckBox{Aufgabe A17}\\
+	\CheckBox{Aufgabe A18}\\
+	%\CheckBox{Aufgabe A4}
+\end{Form}
+
+\section*{A16}
+\begin{enumerate}
+	\item
+		$A$ ist diagonaldominant:
+		\begin{align*}
+			\abs{4} &> \abs{2} + \abs{1}\\
+			\abs{4} &> \abs{1} + \abs{1}\\
+			\abs{4} &> \abs{0} + \abs{3}\\
+										&\Rightarrow \text{ Jacobi-Verfahren konvergiert}
+		\end{align*}
+	\item
+
+		\begin{align*}
+			&x_0: [0, 0, 0]^T\\
+	 &x_1: 
+[ 1.75 , 1.5  , 1.75]^T\\
+&x_2: 
+[ 0.5625,  0.625  , 0.625 ]^T\\
+&x_3: 
+[ 1.28125 ,  1.203125 , 1.28125 ]^T\\
+		\end{align*}
+	\item
+		\begin{align*}
+			k &\geq \frac{\absbb{x_n - x_*}}{\absbb{x_{n-1} - x_*}}\\
+		\end{align*}
+		Fehler f"ur $x_1 = 0.6666667 \quad \leftarrow $ Gr"o"ster Fehler $\Rightarrow 0.666667 \leq k \leq 1$ \\
+		Fehler f"ur $x_2 = 0.59375$\\
+		Fehler f"ur $x_3 = 0.6447368$\\
+
+\end{enumerate}
+\section*{A17}
+
+\begin{enumerate}
+	\item
+		\begin{tikzpicture}[x=.5cm, y=.5cm,domain=-9:9,smooth]
+			%Raster zeichnen
+			\draw [color=gray!50]  [step=5mm] (-11,-10) grid (11,10);
+			% Achsen zeichnen
+			\draw[->,thick] (-10,0) -- (10,0) node[right] {$x$};
+			\draw[->,thick] (0,-9) -- (0,9) node[above] {$y$};
+			% Achsen beschriften
+			\foreach \c in {-8,-6,...,-2,2,4,...,8}{
+				\draw (\c,-.1) -- (\c,.1) node[below=4pt] {$\scriptstyle\c$};
+				\draw (-.1,\c) -- (.1,\c) node[left=4pt] {$\scriptstyle\c$};
+			}
+			\node[below left]{$\scriptstyle0$};
+			%Funktionen zeichnen:
+			\path[name path=rahmen,clip](-11,-9) rectangle (11,9);
+			\draw[name path=p1] plot (\x, {(-(2/5)*\x)});  
+			\draw[color=gray!80,name path=p2] plot (\x, {1 - (1/2)*\x});  
+			%\draw[color=gray!80,name path=p3] plot (\x, {\x-3});  
+		\end{tikzpicture}
+	\item
+		\begin{tikzpicture}[x=.5cm, y=.5cm,domain=-9:9,smooth]
+			%Raster zeichnen
+			\draw [color=gray!50]  [step=5mm] (-11,-10) grid (11,10);
+			% Achsen zeichnen
+			\draw[->,thick] (-10,0) -- (10,0) node[right] {$x$};
+			\draw[->,thick] (0,-9) -- (0,9) node[above] {$y$};
+			% Achsen beschriften
+			\foreach \c in {-8,-6,...,-2,2,4,...,8}{
+				\draw (\c,-.1) -- (\c,.1) node[below=4pt] {$\scriptstyle\c$};
+				\draw (-.1,\c) -- (.1,\c) node[left=4pt] {$\scriptstyle\c$};
+			}
+			\node[below left]{$\scriptstyle0$};
+			%Funktionen zeichnen:
+			\path[name path=rahmen,clip](-11,-9) rectangle (11,9);
+			\draw[name path=p1] plot (\x, {(-(2/5)*\x)});  
+			\draw[color=gray!80,name path=p2] plot (\x, {1 - (1/3)*\x});  
+			\draw[color=gray!80,name path=p3] plot (\x, {\x-3});  
+		\end{tikzpicture}
+	\item
+		\begin{tikzpicture}[x=.5cm, y=.5cm,domain=-9:9,smooth]
+			%Raster zeichnen
+			\draw [color=gray!50]  [step=5mm] (-11,-10) grid (11,10);
+			% Achsen zeichnen
+			\draw[->,thick] (-10,0) -- (10,0) node[right] {$x$};
+			\draw[->,thick] (0,-9) -- (0,9) node[above] {$y$};
+			% Achsen beschriften
+			\foreach \c in {-8,-6,...,-2,2,4,...,8}{
+				\draw (\c,-.1) -- (\c,.1) node[below=4pt] {$\scriptstyle\c$};
+				\draw (-.1,\c) -- (.1,\c) node[left=4pt] {$\scriptstyle\c$};
+			}
+			\node[below left]{$\scriptstyle0$};
+			%Funktionen zeichnen:
+			\path[name path=rahmen,clip](-11,-9) rectangle (11,9);
+			\draw[name path=p1] plot (\x, {(-(2/5)*\x)});  
+			\draw[color=gray!80,name path=p2] plot (\x, {\x});  
+			\draw[color=gray!80,name path=p3] plot (\x, {1-\x});  
+			%\draw[color=gray!80,name path=p4] plot (\y, {-2});  
+		\end{tikzpicture}
+\end{enumerate}
+\section*{A18}
+
+%\begin{align*}
+	%&\max \{ c^T x \;|\; A x \leq b, x \geq 0 \} \\
+		%c^T &= [2, -3, 0, 0, 1]^T\\
+	%A &= \begin{pmatrix}
+	%1 && 2 && 0 && 0 && 0 \\
+	%3 && 6 && 0 && 0 && 0 \\
+	%0 && 0 && 1 && 4 && 3 \\
+	%0 && 0 && 0 && 2 && 3 \\
+	%0 && 0 && 2 && 0 && 3 \\
+	%1 && 3 && 0 && 0 && -4\\
+	%0 && 1 && 0 && 1 && 0 \\
+	%4 && 2 && -2 && 0 && 0 \\
+	%0 && 0 && -1 && 0 && 0 \\
+%\end{pmatrix}\\
+%b &= \begin{pmatrix}
+%18\\
+%54\\
+%120\\
+%50\\
+%190\\
+%1\\
+%20\\
+%-30\\
+%10
+%\end{pmatrix}
+%\end{align*}
+
+\begin{align*}
+	-\min\, &-2x_1 +3x_2 - x_5 \\
+	s.t.\, &x_1 + 2x_2 = 18\\
+	&3x_1 + 6x_2 = 54\\
+	&x_3 + x_4 + 3x_5 = 120 \\
+	&2x_4 + 3x_5 = 50\\
+	&2x_3 + 3x_5 = 190 \\
+	&x_1 + 3x_2 - 4x_5 + x_6 = 1 \\
+	&x_2 + x_4 + x_7 = 20\\
+	&4x_1 + 2x_2 - 2x_3 + x_8 = -30\\
+	&-x_3 + x_9 = 10\\
+	&x_1,x_2,x_5, x_6, x_7, x_8, x_9 \geq 0\\
+	&x_3 = x_3^+ - x_3^-\\
+	&x_4 = x_4^+ - x_4^-\\
+	&x_3^+, x_3^-, x_4^+, x_4^- \geq 0
+\end{align*}
+
+\begin{align*}
+	A =& 
+	\begin{pmatrix}
+		x_1 & x_2 & x_3^+ & x_3^- & x_4^+ & x_4^- & x_5 & x_6 & x_7 & x_8 & x_9\\
+		1 & 2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+		3 & 6 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+		0 & 0 & 1 & 1 & 1 & 1 & 3 & 0 & 0 & 0 & 0\\
+		0 & 0 & 0 & 0 & 2 & 2 & 3 & 0 & 0 & 0 & 0\\
+		0 & 0 & 2 & 2 & 0 & 0 & 3 & 0 & 0 & 0 & 0\\
+		1 & 3 & 0 & 0 & 0 & 0 &-4 & 1 & 0 & 0 & 0\\
+		0 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 0 & 0\\
+		4 & 2 &-2 &-2 & 0 & 0 & 0 & 0 & 0 & 1 & 0\\
+		0 & 0 &-1 &-1 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\
+	\end{pmatrix}\\
+	\vec b =& 
+	\begin{pmatrix}
+		18 \\
+		54\\
+		120\\
+		50\\
+		190\\
+		1\\
+		20\\
+		-30\\
+		10
+	\end{pmatrix}, \,
+	\vec c =
+	\begin{pmatrix}
+		-2 \\ 3 \\ 0 \\ 0 \\ -1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+	\end{pmatrix}
+\end{align*}
+:
+
+
+\end{document}

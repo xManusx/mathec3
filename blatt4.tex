@@ -1,0 +1,264 @@
+\documentclass[fleqn,12pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage[ngerman]{babel}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{wasysym}
+\usepackage{scrpage2}
+\usepackage{gauss}
+\usepackage{tikz}
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\ohead{\pagemark}
+\ihead{Magnus Berendes, matrikelnr} \ifoot{\today} \ofoot{\blattn}
+%\setheadtopline{1pt}
+\setheadsepline{0.4pt}
+\setfootsepline{0.4pt}
+\usepackage{enumitem}
+\setenumerate[0]{label=\alph*)}
+\newcommand{\id}{\, \mathrm{d}}
+\newcommand{\intl}{\int\displaylimits}
+% New definition of square root:
+% it renames \sqrt as \oldsqrt
+\let\oldsqrt\sqrt
+% it defines the new \sqrt in terms of the old one
+\def\sqrt{\mathpalette\DHLhksqrt}
+\def\DHLhksqrt#1#2{%
+	\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
+	\advance\dimen0-0.2\ht0
+	\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+{\box0\lower0.4pt\box2}}
+
+\newcommand{\karos}[2]{
+	\begin{tikzpicture}
+		\draw[step=0.5cm, color=gray] (0,0) grid (#1 cm , #2 cm);
+	\end{tikzpicture}
+}
+
+\usepackage{listings}
+\usepackage{color}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{ %
+	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+	basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\color{mygreen},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+		extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+		frame=single,	                   % adds a frame around the code
+		keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+		keywordstyle=\color{blue},       % keyword style
+		language=python,                 % the language of the code
+		otherkeywords={*,...},           % if you want to add more keywords to the set
+		numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+		numbersep=5pt,                   % how far the line-numbers are from the code
+		numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+		rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+		showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+		showstringspaces=false,          % underline spaces within strings only
+		showtabs=false,                  % show tabs within strings adding particular underscores
+		stringstyle=\color{mymauve},     % string literal style
+		tabsize=2,	                   % sets default tabsize to 2 spaces
+	}
+	\usepackage{float}
+
+\newcommand{\blattn}{Blatt 4}
+
+\begin{document}
+\section*{\blattn}
+Bearbeitet/Zur Korrektur:
+
+\noindent
+\begin{Form}
+	\CheckBox{Aufgabe A10}\\
+	\CheckBox{Aufgabe A11}\\
+	\CheckBox{Aufgabe A12}\\
+	%\CheckBox{Aufgabe A4}
+\end{Form}
+
+\section{A10}
+
+
+\begin{enumerate}
+	\item
+		\begin{itemize}
+			\item
+				Gegeben: 
+				\begin{itemize}
+					\item
+						$f,g$ konvex \\$\Rightarrow f(tx + (1-t)y) \leq tf(x) + (1-t)f(y), t\in[0,1]\\
+						\Rightarrow g(tx + (1-t)y) \leq tg(x) + (1-t)g(y), t\in[0,1]$
+					\item
+						$c_1,c_2 \in \mathbb{R}^+$
+				\end{itemize}
+			\item
+				Zu zeigen:
+				$h(x) = c_1f(x) + c_2g(x)$ konvex, d.h.\\
+				$\Rightarrow h(tx + (1-t)y) \leq th(x) + (1-t)h(y), t\in[0,1]$
+		\end{itemize}
+		\begin{align*}
+			th(x) + (1-t)h(y) &= t(c_1 f(x) + c_2 g(x)) + (1-t)(c_1 f(y) + c_2 g(y))\\
+																				 &= c_1 t f(x) + c_2 t g(x) + (1-t)c_1f(y) + (1-t) c_2 g(y) \\
+																				 &= c_1 t f(x) + c_2 t g(x) + c_1 f(y) - c_1tf(y) + c_2 g(y) - c_2t g(y)\\
+			h(tx + (1-t)y) &\overset?\leq th(x) + (1-t)h(y)\\
+			h(tx + (1-t)y) &= c_1f(tx+(1-t)y) + c_2g(tx+(1-t)y)\\
+			\dots															 &\leq c_1(tf(x) + (1-t)f(y)) + c_2(tg(x) + (1-t)g(y))\\
+			\dots &\leq \underbrace{c_1tf(x) + c_1f(y) -c_1tf(y) + c_2tg(x) + c_2g(y)-c_2tg(y)}_{=th(x) + (1-t)h(y)}\\
+			\Rightarrow h(tx + (1-t)y) &\leq th(x) + (1-t)h(y)\\
+		\end{align*}
+		\hfill $\square$
+		%\begin{align*}
+
+		%\end{align*}
+	\item
+		Zu zeigen: $f(\vec x) = \Vert \vec x\Vert$ konvex, d.h.\\
+		$\Rightarrow \Vert tx + (1-t)y \Vert \overset?\leq t\Vert x\Vert + (1-t)\Vert y \Vert, t\in [0, 1], \forall x,y \in \mathbb{R}^n$
+
+			\begin{align*}
+				t\Vert x\Vert + (1-t)\Vert y \Vert = \Vert tx \Vert + \Vert (1-t) y \Vert &\leq \Vert tx + (1-t)y \Vert\\
+																																																																								 &\text{\footnotesize(Dreiecksungleichung)}
+			\end{align*}
+			Dass $t\Vert x\Vert = \Vert tx\Vert$ gilt, folgt direkt aus
+			\begin{align*}
+				t\Vert x \Vert = t \sqrt{x_1^2 + \dots + x_n^2} = \sqrt{t^2x_1^2 + \dots + t^2x_n^2} = \Vert tx \Vert
+			\end{align*}
+			\hfill $\square$
+
+		\item
+			\begin{align*}
+				f(x) &= -\cos(x)\\
+				f''(x) &= \cos(x) \overset!\geq 0\Rightarrow x \in [-\frac\pi2, \frac\pi2]
+			\end{align*}
+			In $[-\frac\pi2, \frac\pi2]$ ist $f(x)$ konvex
+
+
+		\item
+			\begin{align*}
+				f(x) &= \begin{cases}
+					5x - \frac{37}{128} \cos(x), &x \geq 0 \\
+					-5x - \frac{37}{128} \cos(x), &x < 0
+				\end{cases}\\
+				f''(x) &= \frac{37}{128}\cos(x), x\geq 0 \wedge x < 0\\
+				f''(x) &\geq 0,\quad \forall x \in [-\frac\pi2 , \frac\pi2]
+			\end{align*}
+			$\Rightarrow x$ konvex auf Definitionsbereich
+			%\begin{align*}
+				%f(x) &= \vert x \vert - \frac{37}{128} \cos(x) \\
+			%\end{align*}
+			%Die Positivkombination von zwei konvexen Funktionen ist wieder konvex. Es gen"ugt also zu zeigen, dass sowohl $\vert x\vert$, als auch $-\frac{37}{128} \cos(x)$ konvex ist:
+			%\begin{itemize}
+				%\item
+			%$-\frac{37}{128} \cos(x)$ ist konvex, analog zu Aufgabe c)
+		%\item
+			%Die Konvexit"at von $5\vert x \vert$ folgt aus der Dreiecksungleichung, analog zu Aufgabe~b)
+	%\end{itemize}
+
+\end{enumerate}
+
+\section{A11}
+
+\begin{enumerate}
+	\item
+		$Q$ konvex $\Leftrightarrow \mathcal{H}_Q$ positiv definit\\
+		\begin{align*}
+			\mathcal{H}_Q &= A = \begin{pmatrix}
+			5 &-2 \\
+		-2 & 2 \end{pmatrix}\\
+			\det \begin{pmatrix}
+				5-\lambda & -2 \\
+			-2 & 2-\lambda \end{pmatrix} &= (5-\lambda)(2-\lambda)-4 \overset!= 0\\
+					&\Rightarrow \lambda_1 = 1, \lambda_2 = 6
+		\end{align*}
+		Alle Eigenwerte positiv, $\mathcal{H}_Q$ positiv definit, Q konvex
+
+	\item
+		\begin{itemize}
+			\item Eigenvektoren/-r"aume berechnen:
+				\begin{align*}
+					\lambda_1 &\Rightarrow \begin{gmatrix}[p]
+					4 & -2 & 0 \\
+				-2 & 1 & 0 
+					\rowops
+					\add[2]{0}{1}
+				\end{gmatrix} = \begin{gmatrix}[p]
+					4 & -2 & 0 \\
+				0 & 0 & 0 \end{gmatrix}
+					, V_1 = 
+				\begin{pmatrix} 1 \\ 2\end{pmatrix}\\
+				&ER_1 = \left\{\alpha \cdot \begin{pmatrix} 1\\2\end{pmatrix}, \alpha \in \mathbb{R} \right\}
+				\end{align*}
+				\begin{align*}
+					\lambda_2 &\Rightarrow \begin{gmatrix}[p]
+					-1 & -2 & 0 \\
+					-2 & -4 & 0
+					\rowops
+					\add[-2]{0}{1}
+				\end{gmatrix} = \begin{pmatrix}
+					-1 & -2 & 0 \\
+					0 & 0 & 0
+				\end{pmatrix}, V_2 = \begin{pmatrix} 2 \\ -1\end{pmatrix}\\
+				&ER_6 = \left \{ \alpha \cdot \begin{pmatrix} 2 \\ -1 \end{pmatrix}, \alpha \in \mathbb{R} \right \}
+				\end{align*}
+			\item
+				L"ange der Halbachsen:
+				\begin{align*}
+					\frac{a_1}{a_2} = \sqrt{\frac{\lambda_2}{\lambda_1}} = \sqrt{\frac61} = \sqrt{6} \approx 2.5\\
+				\end{align*}
+				$\Rightarrow a_1$ zweieinhalb mal so lang wie $a_2$
+		\end{itemize}
+	\begin{tikzpicture}
+		\draw[step=0.5cm, color=gray,very thin] (0,0) grid (13 cm , 11 cm);
+			\draw[very thick,->] (6.5,0.5) -- (6.5,10) node[anchor=north west] {$x_1$};
+			\draw[very thick,->] (0.5,5) -- (13,5) node[anchor=south east] {$x_2$};
+			\draw[] (4,0) -- (9,10);
+			\draw[] (1.5,7.5) -- (11.5,2.5);
+			\draw[rotate around={63.44:(6.5,5)}](6.5,5) ellipse (2.5cm and 1cm);
+			\draw[rotate around={63.44:(6.5,5)}](6.5,5) ellipse (1.25cm and 0.5cm);
+			\draw[rotate around={63.44:(6.5,5)}](6.5,5) ellipse (3.75cm and 1.5cm);
+			\draw[rotate around={63.44:(6.5,5)}](6.5,5) ellipse (5cm and 2cm);
+			%\tikz \draw (6.5,5.5) ellipse (2cm and 1cm);
+	\end{tikzpicture}
+	%4.5/1
+	\item
+		Minimum: $Q(0, 0) = 0$, da $Q$ konvex ist das lokale Minimum auch das globale
+		\begin{align*}
+		\text{Maximum} = Q\left(\frac{(1,2)^T}{\Vert (2,-2)^T \Vert}\right) = Q\left(\frac1{\sqrt{5}}\begin{pmatrix}2 \\-1\end{pmatrix}\right) = 6
+		\end{align*}
+		(Auf dem Einheitskreis in Richtung der kürzeren Halbachse)
+\end{enumerate}
+
+\section{A12}
+
+\begin{enumerate}
+	\item
+		\begin{align*}
+			\langle Ax, x \rangle &= \left \langle \begin{pmatrix}
+				9x -y \\
+			-x + 9y \end{pmatrix}, \begin{pmatrix} x \\ y \end{pmatrix} \right \rangle = 9x^2 - 2xy + 9y^2\\
+				%Q(x) &= \frac12 \left ( 9x^2 - 2xy + 9y^2\right ) + 8x + 88 y \\
+				\nabla_Q(x) &= \begin{pmatrix}
+				\frac12 \left ( 18x - 2y \right )+ 8\\
+				\frac12 \left ( 18 y - 2x\right ) + 88
+			\end{pmatrix} = \begin{pmatrix}
+				9x - y + 8\\
+				-x + 9y +88 
+			\end{pmatrix} \overset!= 0\\
+			&\Rightarrow y = -10, x = -2\\
+			Q(-2, -10) &= -448
+		\end{align*}
+		Das Minimum liegt im Punkt $(-2, -10)$
+
+	\item
+		\lstinputlisting{a11.py}
+		\lstinputlisting{a11.out}
+
+\end{enumerate}
+\end{document}

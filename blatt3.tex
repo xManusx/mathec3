@@ -1,0 +1,208 @@
+\documentclass[fleqn,12pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage[ngerman]{babel}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{wasysym}
+\usepackage{scrpage2}
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\ohead{\pagemark}
+\ihead{Magnus Berendes, matrikelnr}
+\ifoot{\today}
+\ofoot{Blatt 3}
+%\setheadtopline{1pt}
+\setheadsepline{0.4pt}
+\setfootsepline{0.4pt}
+\usepackage{enumitem}
+\setenumerate[0]{label=\alph*)}
+\newcommand{\id}{\, \mathrm{d}}
+\newcommand{\intl}{\int\displaylimits}
+% New definition of square root:
+% it renames \sqrt as \oldsqrt
+\let\oldsqrt\sqrt
+% it defines the new \sqrt in terms of the old one
+\def\sqrt{\mathpalette\DHLhksqrt}
+\def\DHLhksqrt#1#2{%
+	\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
+	\advance\dimen0-0.2\ht0
+	\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+{\box0\lower0.4pt\box2}}
+
+\newcommand{\karos}[2]{
+	\begin{tikzpicture}
+		\draw[step=0.5cm, color=gray] (0,0) grid (#1 cm , #2 cm);
+	\end{tikzpicture}
+}
+
+\begin{document}
+\section*{Blatt 3}
+Bearbeitet/Zur Korrektur:
+
+\noindent
+\begin{Form}
+	\CheckBox{Aufgabe A7}\\
+	\CheckBox{Aufgabe A8}\\
+	\CheckBox{Aufgabe A9}\\
+	%\CheckBox{Aufgabe A4}
+\end{Form}
+
+\section{A7}
+\begin{enumerate}
+	\item
+		\begin{align*}
+			&f(x) = \cosh(x)\\
+		 &P = \begin{pmatrix} 0\\1\end{pmatrix}\\
+			&Q = \begin{pmatrix} \ln 5\\ \frac{13}5\end{pmatrix}
+		\end{align*}
+
+		\karos{10}{10}
+	\item
+		\begin{align*}
+			\gamma(t) = \begin{pmatrix}
+				t \\
+				\cosh(t)
+			\end{pmatrix}, t \in [0, \ln 5]
+		\end{align*}
+
+	\item
+		\begin{align*}
+			\text{Bogenl"ange } S &= \int\displaylimits_\gamma f(x) \id s = 
+			\intl_0^{\ln5}\Vert\gamma'(t)\Vert \id t\\
+		&= \intl_0^{\ln5} \left\Vert \begin{pmatrix} 1 \\ \sinh(t) \end{pmatrix} \right\Vert  \id t\\
+		&= \intl_0^{\ln5}\sqrt{ 1 + \sinh^2(t)} \id t = \intl_0^{\ln5} \sqrt{\cosh^2(t)} \id t\\ 
+		&= \left [
+			\sinh(t)
+		\right ]_0^{\ln5}\\
+		&= \sinh(\ln5) - \sinh(0) = \frac{12}5
+	\end{align*}
+
+\item
+	\begin{align*}
+		g(x,y) =& \sinh(x) \sqrt{y}\\
+		\intl_\gamma g \id s =& \intl_\gamma g \Vert \gamma'(t) \Vert \id t\\
+		=& \intl_0^{4.5} \sinh(t) \sqrt{\cosh(t)}\cdot \cosh(t) \id t \\
+		\underset{u:=\cosh(t)}=& \intl_1^{2.6}u^\frac32 \id u\\
+		=& \left [ \frac25 u^\frac52 \right ]_1^{2.6} \approx 3.96
+	\end{align*}
+
+\end{enumerate}
+
+
+\section{A8}
+\begin{enumerate}
+	\item
+		\begin{align*}
+		\gamma(t) &= \begin{pmatrix} t\\t-1\end{pmatrix}, t \in [0, 1], \gamma'(t) = \begin{pmatrix} 1\\ 1 \end{pmatrix} \\
+		\id \vec s &= \gamma'(t) \id t\\
+			W &= \intl_\gamma \vec F \cdot \id \vec s\\
+		\vec F(x,& y) =  (x^2 + y^2) ^{-\frac32} \begin{pmatrix} x \\ y \end{pmatrix}\\
+		\vec F(t,& t-1) = (t^2 + t^2 -2t + 1)^{-\frac32} \begin{pmatrix} t \\ t-1 \end{pmatrix}
+		\end{align*}
+
+		\begin{align*}
+			W &= \intl_\gamma \vec F \cdot \id \vec s \\
+				 &= \intl_0^1 \vec F(t, t-1) \cdot \gamma'(t) \id t\\
+				 &= \intl_0^1 (t^2 + t^2 -2t + 1)^{-\frac32} \begin{pmatrix} t \\ t-1 \end{pmatrix} \cdot \begin{pmatrix}1\\1\end{pmatrix} \id t\\
+				 &= \intl_0^1 (2t-1) (2t^2 -2t + 1)^{-\frac32} \id t\\
+				 &\underset{u:=2t^2 -2t +1}{=} \intl_1^1 \frac{2t-1}{4t-2} \cdot u^{-\frac32}\id u \\
+				 &= \frac12 \intl_1^1 u^{-\frac32} \id u = 0
+		\end{align*}
+
+	\item
+		\begin{align*}
+		\begin{pmatrix}0\\-1 \end{pmatrix} \rightarrow
+		\begin{pmatrix}1 \\ -1 \end{pmatrix} \rightarrow
+		\begin{pmatrix}1 \\ 0 \end{pmatrix}\\
+		\end{align*}
+		\begin{align*}
+		\gamma_1(t_1) &= \begin{pmatrix} t_1\\ -1\end{pmatrix}, \gamma'_1(t_1) = \begin{pmatrix} 1\\ 0 \end{pmatrix}\\
+		\gamma_2(t_2) &= \begin{pmatrix} 1 \\ t_2-1 \end{pmatrix}, \gamma'_2(t_2) = \begin{pmatrix} 0 \\ 1 \end{pmatrix}, t_{1,2} \in [0, 1] \\
+			\gamma(t) &= \gamma_1(t_1) \cup \gamma_2(t_2)
+		\end{align*}
+		\begin{align*}
+			W &= \intl_\gamma \vec F \id \vec s = \intl_{\gamma_1} \vec F \cdot \gamma_1'(t_1) \id t_1 + \intl_{\gamma_2} \vec F \cdot \gamma_2'(t_2) \id t_2 \\
+				 &= \intl_0^1 \vec F(t_1, -1) \cdot \begin{pmatrix} 1\\0\end{pmatrix} \id t_1 +
+		\intl_0^1 \vec F(1, t_2-1) \cdot \begin{pmatrix}0\\1\end{pmatrix} \id t_2\\
+		&= \intl_0^1 (t_1^2 + 1)^{-\frac32} \begin{pmatrix} t_1 \\ -1 \end{pmatrix} \cdot \begin{pmatrix}1\\0\end{pmatrix} \id t_1+
+		\intl_0^1(2 + t_2^2 - 2t_2)^{-\frac32} \begin{pmatrix}1\\t_2 -1\end{pmatrix} \cdot \begin{pmatrix} 0\\1\end{pmatrix} \id t_2\\
+			&= \intl_0^1 t_1(t_1^2 + 1)^{-\frac32} \id t_1 + \intl_0^1 (t_2 -1)(2 + t_2^2 - 2t_2)^{-\frac32} \id t_2 \qquad| \substack{u:=t_1^2 + 1 \\ v:=2 + t_2^2 - 2t_2}\\
+			&=\intl_1^2 \frac{t_1}{2t_1} \cdot u^{-\frac32} \id u +  \intl_2^1 \frac{t_2 -1}{2t_2 -2} \cdot v^{-\frac32} \id v \\
+			&= \frac12 \cdot \left ( \left [-2 u^{-\frac12} \right ]_1^2 - \left [ -2v^{-\frac12} \right ]_1^2 \right ) = 0
+		\end{align*}
+	\item
+
+		\begin{align*}
+		\gamma(t) &= \begin{pmatrix}\sin(t)\\-\cos(t)\end{pmatrix}, t\in\left[0, \frac\pi2\right]\\
+		\gamma'(t) &= \begin{pmatrix}\cos(t)\\ \sin(t) \end{pmatrix}
+		\end{align*}
+		\begin{align*}
+		W &= \intl_0^\frac\pi2\vec F(\sin(t), -\cos(t)) \cdot \begin{pmatrix}\cos(t)\\\sin(t)\end{pmatrix} \id t\\
+			 &= \intl_0^\frac\pi2 (\sin^2(t) + \cos^2(t))^{-\frac32} \begin{pmatrix}\sin(t)\\-\cos(t)\end{pmatrix} \cdot \begin{pmatrix} \cos(t)\\\sin(t)\end{pmatrix}\id t\\
+			 &= \intl_0^\frac\pi2 \frac12 \sin(2t) - \frac12 \sin(2t) \id t = 0
+		\end{align*}
+\end{enumerate}
+
+\section{A9}
+
+\begin{enumerate}
+	\item
+		\begin{align*}
+			O &= \intl_{I_1} \intl_{I_2} \left \Vert \partial_s \gamma(s,t) \times \partial_t \gamma(s, t)
+			\right \Vert \id t \id s \\
+			\gamma(\phi, h) &= \begin{pmatrix}
+			\frac{Rh}{H} \cos \phi\\[0.3em]
+			\frac{Rh}{H} \sin\phi\\[0.3em]
+				h
+			\end{pmatrix}
+			\\
+			\partial_\phi \gamma(\phi, h) &= \begin{pmatrix}
+			\frac{Rh}{H} (-\sin \phi)\\[0.3em]
+			\frac{Rh}{H} \cos\phi\\[0.3em]
+				0
+			\end{pmatrix}, \quad
+			\partial_h \gamma(\phi, h) = \begin{pmatrix}
+				\frac{R}{H} \cos \phi\\[0.3em]
+			\frac{R}{H} \sin\phi\\[0.3em]
+				1
+			\end{pmatrix}\\
+			\partial_\phi \gamma(\phi,h) \times \partial_h \gamma(\phi, h) &=
+			\begin{pmatrix}
+				\frac{Rh}H \cos \phi\\[0.3em]
+				\frac{Rh}H \sin \phi\\[0.3em]
+				\frac{Rh}H\cdot \frac{R}H \cdot (-\sin^2\phi - \cos^2\phi)
+			\end{pmatrix}\\
+			&= \frac{Rh}H \begin{pmatrix}
+			\cos \phi\\[0.3em]
+			\sin\phi\\[0.3em]
+			-\frac{R}H
+		\end{pmatrix}\\
+\left \Vert \frac{Rh}H \begin{pmatrix}
+			\cos \phi\\[0.3em]
+			\sin\phi\\[0.3em]
+			-\frac{R}H
+		\end{pmatrix}\right \Vert &=
+			\frac{Rh}H \cdot \sqrt{\cos^2\phi + \sin^2\phi+\frac{R^2}{H^2}} = \frac{Rh}H \cdot \sqrt{1 + \frac{R^2}{H^2}}
+		\end{align*}
+		\begin{align*}
+			O(H, R) &= \intl_{I_1} \intl_{I_2} \left \Vert \partial_s \gamma(s,t) \times \partial_t \gamma(s, t)
+			\right \Vert \id t \id s \\
+			&= \intl_0^{2\pi} \intl_0^H \frac{Rh}H \cdot \sqrt{1+\frac{R^2}{H^2}} \id h \id \phi\\
+			&= \intl_0^{2\pi} \frac{R}{2H} \cdot H^2 \cdot \sqrt{1+\frac{R^2}{H^2}} \id \phi\\
+			&= \pi \cdot R \cdot \sqrt{H^2 +  R^2}
+		\end{align*}
+	\item
+
+		\begin{align*}
+			\intl_S \vec V \id \vec o &= \intl_{I_1} \intl_{I_2} \vec V(\gamma(s,t)) \cdot \left (\partial_s \gamma(s,t) \times \partial_t \gamma(s,t)\right) \id t \id s\\
+																												 &= \intl_0^{2\pi} \intl_0^H \frac{Rh}H \cdot (\cos \phi + \sin \phi) \id h \id \phi \\
+																												&= \intl_0^{2\pi} \frac12 H R (\cos \phi + \sin\phi) \id \phi \\
+																											 &= \left [ \frac12 HR (-\sin \phi + \cos \phi) \right ]_0^{2\pi} = 0
+		\end{align*}
+\end{enumerate}
+
+\end{document}

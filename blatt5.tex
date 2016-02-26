@@ -1,0 +1,204 @@
+\documentclass[fleqn,12pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage[ngerman]{babel}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{wasysym}
+\usepackage{scrpage2}
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\ohead{\pagemark}
+\ihead{Magnus Berendes, matrikelnr}
+\ifoot{\today}
+\ofoot{\blattn}
+%\setheadtopline{1pt}
+\setheadsepline{0.4pt}
+\setfootsepline{0.4pt}
+\usepackage{enumitem}
+\setenumerate[0]{label=\alph*)}
+\newcommand{\id}{\, \mathrm{d}}
+\newcommand{\intl}{\int\displaylimits}
+% New definition of square root:
+% it renames \sqrt as \oldsqrt
+\let\oldsqrt\sqrt
+% it defines the new \sqrt in terms of the old one
+\def\sqrt{\mathpalette\DHLhksqrt}
+\def\DHLhksqrt#1#2{%
+	\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
+	\advance\dimen0-0.2\ht0
+	\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+{\box0\lower0.4pt\box2}}
+
+
+\newcommand{\blattn}{Blatt 5}
+\begin{document}
+\section*{\blattn}
+Bearbeitet/Zur Korrektur:
+
+\noindent
+\begin{Form}
+	\CheckBox{Aufgabe A13}\\
+	\CheckBox{Aufgabe A14}\\
+	\CheckBox{Aufgabe A15}\\
+	%\CheckBox{Aufgabe A4}
+\end{Form}
+
+\section*{A13}
+\begin{enumerate}
+	\item
+		\begin{align*}
+			\Phi(x) &= \frac12 \cos^3 x\\
+			\Phi'(x) &= \frac32 \cos^2(x) \cdot (-\sin x) \cdot 1\\
+											 &= (\frac32 - \frac32\sin^2(x)) \cdot (-\sin x)\\
+											 &=\frac32 \sin^3(x) - \frac32 \sin x && y:=\sin x\\
+											 &=f(y) = \frac32 y^3 -\frac32 y,\, y\in[-1, 1]\\
+			f'(y) &= \frac92 y^2 - \frac32 \overset!= 0\\
+								 &\Rightarrow \sin x = \pm \frac1{\sqrt{3}}\\
+								 &\Rightarrow x_{1,2} = \pm \frac1{\sqrt{3}}\\
+			\vert \Phi'(x_1) \vert &\approx \vert 0.577 \cdot (-1) \vert = 0.577\\
+			\vert \Phi'(x_2) \vert &\approx 0.577\\
+													&\text{Grenzen des Definitionsbereichs einsetzen:}\\
+			y_3 &= -1,\, y_4 = 1\\
+			\sin(x_3) &= -1 \Rightarrow x_3 = -\frac\pi2\\
+			\sin(x_4) &= 1 \Rightarrow x_4 = \frac\pi2\\
+			\vert \Phi'(x_3) \vert &= 0\\
+			\vert \Phi'(x_4) \vert &= 0\\
+																									 &\Rightarrow \sup_{x \in [-1,1]} \vert \Phi'(x) \vert = 0.577 < 1\\
+																									&\Rightarrow \Phi(x) \text{ kontrahierend}
+		\end{align*}
+	\item Da $\Phi(x)$ kontrahierend ist, gibt es genau einen Fixpunkt $x_*$ für den $x_*=\Phi(x_*)$ gilt. Somit hat $x = \frac12 \cos^3 x$ nur eine Lösung.
+\item
+				\begin{align*}
+					x_1&=0.5\\
+					x_2&=0.33793561091735264\\
+					x_3&=0.4198695547443537\\
+					x_4&=0.38070198010453765\\
+					x_5&=0.40011151692990193\\
+					x_6&=0.39063732555067615\\
+					x_7&=0.3952987779161624\\
+					x_8&=0.39301388768981166\\
+					x_9&=0.3941359725607877\\
+					x_10&=0.3935854326150147\\
+					x_11&=0.3938556714333518\\
+					x_12&=0.39372305090763887\\
+					x_13&=0.39378814189563477\\
+					x_14&=0.3937561965292067\\
+					x_15&=0.39377187509123035\\
+\end{align*}
+Ab $x_8$ ändert sich die zweite Nachkommastelle beim Runden nicht mehr.
+\begin{align*}
+	\Rightarrow x_* \approx 0.39
+\end{align*}
+
+\end{enumerate}
+
+\section*{A14}
+\begin{enumerate}
+	\item
+		\begin{align*}
+			\Phi(x)& = \frac{x}2 + \frac1x\\
+			%\Phi(x)& \text{ kontrahierend auf } [1,2] \Leftrightarrow \Vert \Phi(x) - \Phi(y) \Vert \leq k \cdot \Vert x - y \Vert, \, &x,y \in [1,2], \\ & &k \in (0,1)
+			\Phi(x)& \text{ kontrahierend auf } [1,2] \Leftrightarrow \sup_{x\in[1,2]} \Vert \Phi'(x) \Vert < 1\\
+			\Phi'(x)& = \frac12 - \frac1{x^2}  \\
+			\Phi''(x)& = \frac2{x^3}\not = 0 \,\forall x \in [1,2] \Rightarrow \Phi'(x) \text{ keine lokalen Extrema} \\
+			\Phi'(1)& = -\frac12 \\
+			\Phi'(2)& = \frac14\\
+			k =& \sup_{x\in[1,2]} \Vert \Phi'(x) \Vert = \frac12< 1\\
+		\end{align*}
+		$k$ ist die Kontraktionskonstante
+		\item
+			\begin{align*}
+				\Phi'(x) &= \frac12 - \frac1{x^2} \overset!= 0\\
+												 &\Rightarrow x_{1,2} = \pm \sqrt{2}, \, -\sqrt{2} \not \in [1,2]\\
+				\Phi(\sqrt{2})&\approx 1.41\\
+				\Phi(1) &= 1.5 \\
+				\Phi(2) &= 1.5 \\
+			\end{align*}
+			Da weder am Extremum, noch an den Rändern das Intervall $[1,2]$ verlassen wird, ist klar, dass $\Phi(x)$ eine Abbildung von $[1,2] \rightarrow [1,2]$ und somit eine Selbstabbildung ist.
+		\item
+			\begin{align*}
+				x_1&=1.5 \\
+x_2&=1.4166666666666665\\
+x_3&=1.4142156862745097\\
+x_4&=1.4142135623746899\\
+			\end{align*}
+
+		\item
+			\begin{align*}
+				&\Vert x_4 - x_* \Vert \leq \frac{k}{1-k} \Vert x_4 - x_3 \Vert \\
+				\Rightarrow& \vert x_4 - x_* \vert \leq \vert x_4 -x_3 \vert \cdot \frac{0.5}{0.5}\\
+				\Rightarrow& \vert x_4 - x_* \vert \leq 12 \cdot 10^{-6}\\
+				\Rightarrow& \text{ Der Abstand zwischen } x_* \text{ und } x_4 \text{ ist höchstens } 2.12\cdot 10^{-6}
+			\end{align*}
+
+
+\end{enumerate}
+\section*{A15}
+\begin{enumerate}
+	\item
+
+		\begin{align*}
+			\Phi(x) &= x - \frac{f(x)}{f'(x)}\\
+			\Phi &: \mathbb{R} \rightarrow \mathbb{R},\, \mathbb{R} \text{ ist Banachraum}
+		\end{align*}
+		Um die Kontraktion von $\Phi(x)$ zu zeigen muss gelten: $\sup_{x\in\mathbb{R}} \vert \Phi'(x) \vert < 1$
+		\begin{align*}
+			\Phi'(x) = 1 - \frac{f'(x) \cdot f'(x) - f(x) \cdot f''(x)}{f'(x) \cdot f'(x)}
+			= \frac{f(x) \cdot f''(x)}{f'(x)^2}\\
+			\text{ Aus der Vorraussetzung folgt: } \frac{\vert f(x) \cdot f''(x)\vert}{\vert f'(x) \vert^2} < k, \, k \in (0,1)\\
+			\Rightarrow \left \vert \frac{f(x) \cdot f''(x)}{f'(x)^2} \right \vert < k\\
+			\Rightarrow \sup_{x \in \mathbb{R}} \vert \Phi'(x) \vert < k\, \Rightarrow \, \Phi(x)\, \text{kontrahierend}
+		\end{align*}
+		Damit gilt der Fixpunktsatz für $\Phi(x) = x - \frac{f(x)}{f'(x)}$, das Newton-Verfahren konvergiert also unabhängig vom Startwert, falls die Vorbedingung $\vert f(x) f''(x) \vert < k \vert f'(x) \vert^2\quad \forall x \in \mathbb{R}$ gilt
+		\item
+			\begin{enumerate}[label=\roman*)]
+					\item
+						\begin{align*}
+							f(x) = \sinh x,\, f'(x) = \cosh x, \, f''(x) = \sinh x
+						\end{align*}
+						\begin{align*}
+							\vert \sinh^2 x \vert &< k \cosh^2 x\\
+							\left \vert \frac{e^x - e^{-x}}{2} \right \vert ^2 &< k \left( \frac{e^x + e^{-x}}{2} \right)^2\\
+							\left \vert \frac{e^x - e^{-x}}{2} \right \vert &< \sqrt{k}\frac{e^x + e^{-x}}{2}\\
+							\vert e^x - e^{-x} \vert &< \sqrt{k}(e^x + e^{-x})\\
+							\frac{\overbrace{\vert e^x - e^{-x} \vert}^{<e^x}}{\underbrace{e^x + e^{-x}}_{>e^x}} &< \sqrt{k}\\
+					&\Rightarrow \frac{{\vert e^x - e^{-x} \vert}}{{e^x + e^{-x}}} < 1\\
+							\exists k \in (0,1): 
+							&\Rightarrow \frac{{\vert e^x - e^{-x} \vert}}{{e^x + e^{-x}}} < \sqrt{k}\\
+						\end{align*}
+					\item
+						\begin{align*}
+							f(x) = 2e^{3x}, \, f'(x) = 6e^{3x},\, f''(x) = 18e^{3x}
+						\end{align*}
+						\begin{align*}
+						\end{align*}
+							\begin{align*}
+								\vert \underbrace{2e^{3x} \cdot 18 e^{3x}}_{>0} \vert &< k\cdot (6e^{3x})^2, k \in (0,1)\\
+								36 e^{6x} &\not< k \cdot 36e^{6x}\\
+								&\Rightarrow (3) \text{ gilt nicht}
+							\end{align*}
+						\item
+							\begin{align*}
+								&f(x) = 3x + 4, \, f'(x) = 3,\, f''(x) = 0\\
+							\end{align*}
+							\begin{align*}
+								\vert (3x + 4)\cdot 0 \vert &< k \cdot \vert 3 \vert^2, k \in (0,1)\\
+								0 &< k\cdot 9\\
+									 &\Rightarrow \text{Gilt für alle } k\in (0,1)
+							\end{align*}
+							\item
+								\begin{align*}
+									f(x) = x^2, \, f'(x) = 2x, \, f''(x) = 2
+								\end{align*}
+								\begin{align*}
+									\vert 2x^2 \vert &< k \cdot \vert (2x)^2 \vert, k \in (0,1)\\
+									2x^2 &< k \cdot 4x^2\\
+									&\Rightarrow \text{Gilt für } k > \frac12
+								\end{align*}
+				\end{enumerate}
+\end{enumerate}
+
+\end{document}

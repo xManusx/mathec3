@@ -1,0 +1,268 @@
+\documentclass[fleqn,12pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage[ngerman]{babel}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{wasysym}
+\usepackage{scrpage2}
+\usepackage{pifont}
+\usepackage{listings}
+\usepackage{color}
+
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+	basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\color{mygreen},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+		extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+		frame=single,	                   % adds a frame around the code
+		keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+		keywordstyle=\color{blue},       % keyword style
+		language=python,                 % the language of the code
+		otherkeywords={*,...},           % if you want to add more keywords to the set
+		numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+		numbersep=5pt,                   % how far the line-numbers are from the code
+		numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+		rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+		showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+		showstringspaces=false,          % underline spaces within strings only
+		showtabs=false,                  % show tabs within strings adding particular underscores
+		stringstyle=\color{mymauve},     % string literal style
+		tabsize=2,	                   % sets default tabsize to 2 spaces
+	}
+	\usepackage{float}
+	\pagestyle{scrheadings}
+	\clearscrheadfoot
+	\ohead{\pagemark}
+	\ihead{Magnus Berendes, matrikelnr}
+	\ifoot{\today}
+	\ofoot{Blatt 2}
+	%\setheadtopline{1pt}
+	\setheadsepline{0.4pt}
+	\setfootsepline{0.4pt}
+	\usepackage{enumitem}
+	\setenumerate[0]{label=\alph*)}
+
+	\begin{document}
+	\section*{Blatt X}
+	Bearbeitet/Zur Korrektur:
+
+	\noindent
+	\begin{Form}
+		\CheckBox{A4}\\
+		\CheckBox{A5}\\
+		\CheckBox{A6}\\
+		%\CheckBox{Aufgabe A4}
+	\end{Form}
+
+	\section*{A4}
+	\begin{enumerate}
+
+		\item
+			\textbf{1. Ansatz:} (Aufgestellt vor "Ubung)
+			\begin{equation*}
+				f(x,y) = 2x + y,\quad \text{Nebenbedingung: } g(x,y) = e^{3x+y} - x = 0
+			\end{equation*}
+			\begin{equation*}
+				\mathcal{L}_f(x,y, \lambda) =
+				2x + y +
+				\lambda(e^{3x+y} - x)
+			\end{equation*}
+			\begin{equation*}
+				\nabla_{\mathcal{L}f}(x,y,\lambda) =
+				\begin{pmatrix}
+					2 + \lambda(3e^{3x+y} - 1)\\
+					1 + \lambda e^{3x+y}\\
+					e^{3x+y} - x
+				\end{pmatrix}
+				= \begin{pmatrix}
+					2 + \lambda3e^{3x+y} - \lambda\\
+					1 + \lambda e^{3x+y}\\
+					e^{3x+y} - x
+				\end{pmatrix}
+				\overset!= 0
+			\end{equation*}
+			\begin{align*}
+				& -1 - \lambda = 0 && \text{(I - 3II)} \\
+				\Rightarrow& \lambda = -1  && \\
+									& e^{3x+y} - x = 1 + \lambda e^{3x+y} && \text{(II = III)}\\
+										& 2 -3x + 1 = 0 && \text{(I + 3III)} \\
+				\Rightarrow& x = 1 && \\
+													& e^{3+y} - 1 = 0 && \text{($x=3$ in III)} \\
+								& 3+y = 0 &&\\
+				\Rightarrow& y = -3 &&\\
+			\Rightarrow& S = \begin{pmatrix}1 \\ -3\end{pmatrix} &&
+			\end{align*}
+			\begin{equation*}
+				(\Rightarrow 1 + \lambda e^{3x+y} = 2 + \lambda 3e^{3x+y} - \lambda))
+			\end{equation*}
+
+			\textbf{L"osung wie in "Ubung:}
+			\begin{equation*}
+				f(x,y) = 2x + y,\quad \text{Nebenbedingung: } g(x,y) = e^{3x+y} - x = 0
+			\end{equation*}
+			\begin{align*}
+				&\nabla_f = \lambda \cdot \nabla_g \wedge g = 0
+			\end{align*}
+			\begin{align*}
+				&f_x = 2, &f_y = 1 &&\\
+			 &g_x = 3e^{3x+y} - 1, &g_y = e^{3x+y} &&\\
+			\end{align*}
+			\begin{align*}
+				2 &= \lambda \cdot (3e^{3x+y} - 1) && \text{(I)}\\
+				1 &= \lambda \cdot e^{3x+y} && \text{(II)}\\
+				x &= e^{3x+y} && \text{(III)}\\
+				\overset{(III)}\Rightarrow& && \\
+				2 &= \lambda \cdot (3x - 1) && \text{(I*)}\\
+				1 &= \lambda \cdot x && \text{(II*)}\\
+				\overset{(II*) \text{in} (I*)}\Rightarrow& && \\
+				2 &= \frac1x \cdot(3x -1) &&\\
+				2 &= 3 - \frac1x&&\\
+				1 &= \frac1x \Rightarrow  x = 1 &&\\
+				\overset{x=1 \text{in} (III)}\Rightarrow& && \\
+				\ln 1 &= 3 + y \Rightarrow y = -3 && \\
+			\end{align*}
+		$\Rightarrow S = \begin{pmatrix} 1 \\ -3\end{pmatrix}$ 
+
+
+
+
+
+		\item
+			\begin{equation*}
+				P = (e, 1 - 3e)
+			\end{equation*}
+			\begin{align*}
+				e^{3e + (1 - 3e)} - e &\overset?= 0\\
+				e^{3e - 3e + 1} - e &= \\
+				e^1 - e &= 0
+			\end{align*}
+			$\Rightarrow$ P erf"ullt Nebenbedingung
+
+		\item
+			\begin{align*}
+				f(P) \overset?< f(S)
+			\end{align*}
+			\begin{align*}
+				f(P) &= f(e, 1 - 3e) = \\
+							&= 2e + 1 -3e 
+				= 1 - e\\
+				&\approx -1,7\\
+				f(S) &= f(1, -3) \\
+							&= 2 -3 \\
+					 &= -1
+			\end{align*}
+			$f(P) < f(S)$, deswegen kann S kein globales Minimum sein.
+		\item
+			Vorbedigungen f"ur den Satz von Minimum und Maximum:
+			\begin{itemize}
+				\item f stetig \checkmark
+				\item Durch g definierte Menge ist abgeschlossen \checkmark
+				\item Durch g definierte Menge ist beschr"ankt \ding{55}\\
+					Nebenbedingung: $e^{3x+y} = x \Rightarrow y = \ln x - 3x$
+					\\ 
+					$\lim\limits_{x \to \infty} \ln x - 3x = - \infty$\\
+					$\Rightarrow$ Menge nicht beschränkt
+			\end{itemize}
+			Die Vorbedigungen sind nicht erfüllt, insofern sagt uns der Satz nichts "uber m"ogliche Minima/Maxima von $f$ auf der von $g$ definierten Menge
+	\end{enumerate}
+
+	\section*{A5}
+	\begin{enumerate}
+		\item
+			Kritische Punkte auf Rand von $K = \{(x,y) | x^2 + 4y^2 - 1 \leq 0\} $:
+			\begin{equation*}
+				f(x,y) = x^2 -2(y+1)^2, \quad x^2 + 4y^2 \leq 1
+			\end{equation*}
+
+			\begin{align*}
+				\nabla_f &= \lambda \cdot_g \wedge g = 0\\
+				2x &= \lambda \cdot 2x && (I)\\
+				-4y-4 &= \lambda \cdot 8y && (II) \\
+				1 &= x^2 + 4y^2 && (III) \\
+				(I) &\Rightarrow \lambda = 1 \wedge x = 0
+			\end{align*}
+			Fall 1: $\lambda = 1$
+			\begin{align*}
+				-4y - 4 &= 8y && (II) \\
+				4 &= 12y \Rightarrow y = \frac13&& \\
+				1 &= x^2 + \frac49 && (III)\\
+				\frac59 &= x^2 \\
+											&\Rightarrow x = \pm\sqrt{\frac59} = \pm\frac{\sqrt{5}}3\\
+										 &\overset{(II)}\Rightarrow y = -\frac13
+			\end{align*}
+		$S_{1,2} = \begin{pmatrix}\pm\frac{\sqrt{5}}3\\ -\frac13\end{pmatrix}$
+
+			Fall 2: $x = 0$
+			\begin{align*}
+				1 &= 4y^2 && (III)\\
+					&\Rightarrow y = \pm \sqrt{\frac14} = \pm {\frac12}\\
+				 &\Rightarrow S_{3,4} = \begin{pmatrix} 0\\ \pm{\frac12}\end{pmatrix}\\
+			\end{align*}
+			\begin{align*}
+				&f(S_1) = f(S_2) = f(\pm\frac{\sqrt{5}}3, \frac13) = -3\\
+				&f(S_3) = f(0, {\frac12}) =  -4.5\\
+				&f(S_4) = f(0, -{\frac12}) = -1\\
+			\end{align*}
+			$\Rightarrow S_3$ Minimum von f auf Rand von K, $S_4$ Maximum von f auf Rand von K
+
+			Weiterhin gesucht: m"ogliche Min-/Maxima in K:
+
+			\begin{align*}
+			\nabla_f(x,y) = \begin{pmatrix} 2x \\ -4y-4)\end{pmatrix} \overset!= 0
+			\end{align*}
+			$\Rightarrow x =0, y=-1$, Punkt  allerdings nicht in $K$: $0^2 + 4(-1)^2 = 4 \nleqslant 0$
+
+			$\Rightarrow S_3$ Minimum, $S_4$ Maximum
+
+
+
+	\end{enumerate}
+	\section*{A6}
+	\begin{enumerate}
+		\item
+			Damit eine solche lokale Aufl"osungsfunktion existiert muss der Nenner des Bruchs im Iterationsalgorithmus existieren, d.h. nicht 0 sein:
+			\begin{equation*}
+				\partial_2f(x_0,y_0) \overset?\neq 0
+			\end{equation*}
+			\begin{align*}
+				f(x,y) &= 
+				\cos x \cosh y - \sin x \sinh y\\
+				\partial_2f(x,y) &= \cos x \sinh y - \sin x \cosh y\\
+				x_0 = 0, y_0 = 0\\
+				\partial_2f(x_0,y_0) &= \cos \frac{\pi}2 \sinh 0 - \sin \frac{\pi}2 \cosh 0 = -1\\
+			\end{align*}
+			Damit existiert die lokale Aufl"osungsfunktion
+
+			\newpage
+		\item
+			%\lstinputlisting[basicstyle=\scriptsize]{aufloesef.py}
+			\lstinputlisting{ergebnis.out}
+\item
+	\begin{itemize}
+		\item
+			konvergiert schnell f"ur $x=1.5$ $\Leftarrow$ Abst"ande zwischen den $y_i$ werden schnell kleiner, Funktionswerte n"ahern sich schnell an 0 an
+		\item
+			konvergiert f"ur $x=1$ $\Leftarrow$ Abst"ande zwischen den $y_i$ werden kleiner, Funktionswerte n"ahern sich an 0 an
+
+		\item
+		divergiert f"ur $x=0$ $\Leftarrow$ Abst"ande zwischen den $y_i$ werden gr"o"ser, Funktionswerte machen irgendwas, Abstand $0 \leftrightarrow \frac\pi2$ ist mit $1.6$ zu groß.
+	\end{itemize}
+
+	\end{enumerate}
+
+
+
+	\end{document}
